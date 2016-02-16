@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+id: commerce_product_variation.field_stock
+field_name: field_stock
+entity_type: commerce_product_variation
+type: entity_reference
+settings:
+  target_type: commerce_stock
+module: core
+locked: ture
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

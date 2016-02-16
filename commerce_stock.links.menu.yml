@@ -1,0 +1,5 @@
+entity.commerce_stock_type.collection:
+  title: 'Stock types'
+  route_name: 'entity.commerce_stock_type.collection'
+  parent: 'commerce.configuration'
+  description: 'Manage your stock types.'

@@ -1,0 +1,7 @@
+entity.commerce_stock_type.collection:
+  path: '/admin/commerce/config/stock-types'
+  defaults:
+    _entity_list: 'commerce_stock_type'
+    _title: 'Commerce stock types'
+  requirements:
+    _permission: 'administer commerce stock types'

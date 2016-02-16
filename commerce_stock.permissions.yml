@@ -1,0 +1,19 @@
+'delete stock entity':
+  title: 'Delete stock content.'
+
+'add stock entity':
+  title: 'Add stock content'
+
+'view stock entity':
+  title: 'View stock content'
+
+'edit stock entity':
+  title: 'Edit stock content'
+
+'administer stock entity':
+  title: 'Administer stock settings'
+
+'administer commerce stock types':
+  title: 'Administer commerce stock types'
+  description: 'Allows users to administer commerce stock types.'
+  'restrict access': TRUE

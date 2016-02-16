@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.default
+    - field.storage.commerce_product_variation.field_stock
+    - commerce_stock.commerce_stock_type.default
+id: commerce_product_variation.default.field_stock
+field_name: field_stock
+entity_type: commerce_product_variation
+bundle: default
+label: Stock
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:commerce_stock'
+  handler_settings:
+    target_bundles:
+      - default
+field_type: entity_reference
