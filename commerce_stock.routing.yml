@@ -5,3 +5,12 @@ entity.commerce_stock_type.collection:
     _title: 'Commerce stock types'
   requirements:
     _permission: 'administer commerce stock types'
+
+entity.commerce_stock.revision:
+  path: '/commerce-stock/{commerce_stock}/revisions/{commerce_stock_revision}/view'
+  defaults:
+    _controller: '\Drupal\commerce_stock\Controller\CommerceStockController::revisionShow'
+    _title_callback: '\Drupal\commerce_stock\Controller\CommerceStockController::revisionPageTitle'
+  requirements:
+    _permission: 'administer stock entity'
+    commerce_stock: \d+

@@ -34,14 +34,20 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   translatable = TRUE,
  *   base_table = "commerce_stock",
  *   data_table = "commerce_stock_field_data",
+ *   revision_table = "commerce_stock_revision",
+ *   revision_data_table = "commerce_stock_field_revision",
  *   entity_keys = {
  *     "id" = "stock_id",
+ *     "revision" = "vid",
  *     "bundle" = "type",
  *     "langcode" = "langcode",
  *     "uuid" = "uuid",
  *   },
  *   bundle_entity_type = "commerce_stock_type",
  *   field_ui_base_route = "entity.commerce_stock_type.edit_form",
+ *   links = {
+ *     "revision" = "/commerce-stock/{commerce_stock}/revisions/{commerce_stock_revision}/view",
+ *   }
  * )
  */
 class CommerceStock extends ContentEntityBase {
@@ -60,6 +66,7 @@ class CommerceStock extends ContentEntityBase {
       ->setLabel(t('Quantity'))
       ->setDescription(t('The quantity of the product.'))
       ->setRequired(TRUE)
+      ->setRevisionable(TRUE)
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
