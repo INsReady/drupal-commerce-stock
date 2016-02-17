@@ -14,3 +14,35 @@ entity.commerce_stock.revision:
   requirements:
     _permission: 'administer stock entity'
     commerce_stock: \d+
+
+entity.commerce_stock_location.collection:
+  path: '/admin/commerce/commerce-stock-locations'
+  defaults:
+    _entity_list: 'commerce_stock_location'
+    _title: 'Commerce stock locations'
+  requirements:
+    _permission: 'administer stock entity'
+
+entity.commerce_stock_location.add_form:
+  path: '/admin/commerce/commerce-stock-location/add'
+  defaults:
+    _entity_form: 'commerce_stock_location.add'
+    _title: 'Add Commerce stock location'
+  requirements:
+    _permission: 'administer stock entity'
+
+entity.commerce_stock_location.edit_form:
+  path: '/admin/commerce/commerce-stock-location/{commerce_stock_location}/edit'
+  defaults:
+    _entity_form: 'commerce_stock_location.edit'
+    _title: 'Edit Commerce stock location'
+  requirements:
+    _permission: 'administer stock entity'
+
+entity.commerce_stock_location.delete_form:
+  path: '/admin/commerce/commerce-stock-location/{commerce_stock_location}/delete'
+  defaults:
+    _entity_form: 'commerce_stock_location.delete'
+    _title: 'Delete Commerce stock location'
+  requirements:
+    _permission: 'administer stock entity'

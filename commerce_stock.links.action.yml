@@ -3,3 +3,9 @@ entity.commerce_stock_type.add_form:
   title: 'Add stock type'
   appears_on:
     - entity.commerce_stock_type.collection
+
+entity.commerce_stock_location.add_form:
+  route_name: entity.commerce_stock_location.add_form
+  title: 'Add Commerce stock location'
+  appears_on:
+    - entity.commerce_stock_location.collection

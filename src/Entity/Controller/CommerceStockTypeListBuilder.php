@@ -5,7 +5,7 @@
  * Contains \Drupal\commerce_stock\CommerceStockTypeListBuilder.
  */
 
-namespace Drupal\commerce_stock;
+namespace Drupal\commerce_stock\Entity\Controller;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;

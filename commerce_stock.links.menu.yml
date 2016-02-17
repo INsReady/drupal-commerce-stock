@@ -1,5 +1,12 @@
 entity.commerce_stock_type.collection:
-  title: 'Stock types'
+  title: 'Commerce stock types'
   route_name: 'entity.commerce_stock_type.collection'
   parent: 'commerce.configuration'
   description: 'Manage your stock types.'
+
+entity.commerce_stock_location.collection:
+  title: 'Commerce stock locations'
+  route_name: 'entity.commerce_stock_location.collection'
+  parent: 'commerce.admin_commerce'
+  description: 'Manage commerce stock locations.'
+  weight: 9

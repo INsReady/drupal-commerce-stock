@@ -16,7 +16,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *   id = "commerce_stock_type",
  *   label = @Translation("Commerce stock type"),
  *   handlers = {
- *     "list_builder" = "Drupal\commerce_stock\CommerceStockTypeListBuilder",
+ *     "list_builder" = "Drupal\commerce_stock\Entity\Controller\CommerceStockTypeListBuilder",
  *     "form" = {
  *       "add" = "Drupal\commerce_stock\Form\CommerceStockTypeForm",
  *       "edit" = "Drupal\commerce_stock\Form\CommerceStockTypeForm",
