@@ -1,11 +1,11 @@
 entity.commerce_stock_type.collection:
-  title: 'Commerce stock types'
+  title: 'Stock types'
   route_name: 'entity.commerce_stock_type.collection'
   parent: 'commerce.configuration'
   description: 'Manage your stock types.'
 
 entity.commerce_stock_location.collection:
-  title: 'Commerce stock locations'
+  title: 'Stock locations'
   route_name: 'entity.commerce_stock_location.collection'
   parent: 'commerce.admin_commerce'
   description: 'Manage commerce stock locations.'

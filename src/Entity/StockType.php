@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\commerce_stock\Entity\CommerceStockType.
+ * Contains \Drupal\commerce_stock\Entity\StockType.
  */
 
 namespace Drupal\commerce_stock\Entity;
@@ -16,11 +16,11 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *   id = "commerce_stock_type",
  *   label = @Translation("Commerce stock type"),
  *   handlers = {
- *     "list_builder" = "Drupal\commerce_stock\Entity\Controller\CommerceStockTypeListBuilder",
+ *     "list_builder" = "Drupal\commerce_stock\Entity\Controller\StockTypeListBuilder",
  *     "form" = {
- *       "add" = "Drupal\commerce_stock\Form\CommerceStockTypeForm",
- *       "edit" = "Drupal\commerce_stock\Form\CommerceStockTypeForm",
- *       "delete" = "Drupal\commerce_stock\Form\CommerceStockTypeDeleteForm"
+ *       "add" = "Drupal\commerce_stock\Form\StockTypeForm",
+ *       "edit" = "Drupal\commerce_stock\Form\StockTypeForm",
+ *       "delete" = "Drupal\commerce_stock\Form\StockTypeDeleteForm"
  *     },
  *     "route_provider" = {
  *       "default" = "Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider",
@@ -47,7 +47,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *   }
  * )
  */
-class CommerceStockType extends ConfigEntityBundleBase {
+class StockType extends ConfigEntityBundleBase {
   /**
    * The stock type id.
    *

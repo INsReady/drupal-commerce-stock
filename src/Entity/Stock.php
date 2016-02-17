@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\commerce_stock\Entity\CommerceStock.
+ * Contains \Drupal\commerce_stock\Entity\Stock.
  */
 
 namespace Drupal\commerce_stock\Entity;
@@ -20,13 +20,13 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   id = "commerce_stock",
  *   label = @Translation("Commerce stock"),
  *   handlers = {
- *     "storage" = "Drupal\commerce\CommerceContentEntityStorage",
+ *     "storage" = "Drupal\commerce\ContentEntityStorage",
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "form" = {
  *       "default" = "Drupal\Core\Entity\ContentEntityForm",
  *     },
- *     "inline_form" = "Drupal\commerce_stock\Form\CommerceStockInlineForm",
+ *     "inline_form" = "Drupal\commerce_stock\Form\StockInlineForm",
  *     "translation" = "Drupal\content_translation\ContentTranslationHandler"
  *   },
  *   admin_permission = "administer stock entity",
@@ -50,7 +50,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   }
  * )
  */
-class CommerceStock extends ContentEntityBase {
+class Stock extends ContentEntityBase {
 
   use EntityChangedTrait, EntityKeysFieldsTrait;
 

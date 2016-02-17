@@ -1,14 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: edxxu
- * Date: 2/16/16
- * Time: 11:40 PM
- */
-
-/**
  * @file
- * Contains \Drupal\commerce_stock\Controller\CommerceStockController.
+ * Contains \Drupal\commerce_stock\Controller\StockController.
  */
 
 namespace Drupal\commerce_stock\Controller;
@@ -17,7 +10,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\Controller\EntityViewController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class CommerceStockController extends ControllerBase {
+class StockController extends ControllerBase {
 
   /**
    * The renderer service.
@@ -27,7 +20,7 @@ class CommerceStockController extends ControllerBase {
   protected $renderer;
 
   /**
-   * Constructs a CommerceStockController object.
+   * Constructs a StockController object.
    *
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer service.

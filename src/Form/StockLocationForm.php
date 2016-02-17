@@ -11,7 +11,7 @@ namespace Drupal\commerce_stock\Form;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
-class CommerceStockLocationForm extends ContentEntityForm {
+class StockLocationForm extends ContentEntityForm {
 
   /**
    * {@inheritdoc}

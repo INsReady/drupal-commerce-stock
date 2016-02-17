@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\commerce_stock\Form\CommerceStockTypeDeleteForm.
+ * Contains \Drupal\commerce_stock\Form\StockTypeDeleteForm.
  */
 
 namespace Drupal\commerce_stock\Form;
@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Builds the form to delete a stock type.
  */
-class CommerceStockTypeDeleteForm extends EntityDeleteForm {
+class StockTypeDeleteForm extends EntityDeleteForm {
 
   /**
    * The query factory to create entity queries.

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\commerce_stock\Entity\Controller\CommerceStockLocationListBuilder.
+ * Contains \Drupal\commerce_stock\Entity\Controller\StockLocationListBuilder.
  */
 
 namespace Drupal\commerce_stock\Entity\Controller;
@@ -13,7 +13,7 @@ use Drupal\Core\Entity\EntityListBuilder;
 /**
  * Defines the list builder for commerce_stock_location.
  */
-class CommerceStockLocationListBuilder extends EntityListBuilder {
+class StockLocationListBuilder extends EntityListBuilder {
 
   /**
    * {@inheritdoc}

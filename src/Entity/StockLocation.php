@@ -8,7 +8,7 @@
 
 /**
  * @file
- * Contains \Drupal\commerce_stock\Entity\CommerceStockLocation.
+ * Contains \Drupal\commerce_stock\Entity\StockLocation.
  */
 
 namespace Drupal\commerce_stock\Entity;
@@ -26,14 +26,14 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   id = "commerce_stock_location",
  *   label = @Translation("Commerce stock location"),
  *   handlers = {
- *     "storage" = "Drupal\commerce\CommerceContentEntityStorage",
+ *     "storage" = "Drupal\commerce\ContentEntityStorage",
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
- *     "list_builder" = "Drupal\commerce_stock\Entity\Controller\CommerceStockLocationListBuilder",
+ *     "list_builder" = "Drupal\commerce_stock\Entity\Controller\StockLocationListBuilder",
  *     "form" = {
- *       "add" = "Drupal\commerce_stock\Form\CommerceStockLocationForm",
- *       "edit" = "Drupal\commerce_stock\Form\CommerceStockLocationForm",
- *       "delete" = "Drupal\commerce_stock\Form\CommerceStockLocationDeleteForm",
+ *       "add" = "Drupal\commerce_stock\Form\StockLocationForm",
+ *       "edit" = "Drupal\commerce_stock\Form\StockLocationForm",
+ *       "delete" = "Drupal\commerce_stock\Form\StockLocationDeleteForm",
  *     },
  *     "translation" = "Drupal\content_translation\ContentTranslationHandler"
  *   },
@@ -57,7 +57,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   }
  * )
  */
-class CommerceStockLocation extends ContentEntityBase {
+class StockLocation extends ContentEntityBase {
 
   use EntityChangedTrait, EntityKeysFieldsTrait;
 

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\commerce_stock\CommerceStockTypeListBuilder.
+ * Contains \Drupal\commerce_stock\StockTypeListBuilder.
  */
 
 namespace Drupal\commerce_stock\Entity\Controller;
@@ -13,7 +13,7 @@ use Drupal\Core\Entity\EntityInterface;
 /**
  * Defines the list builder for stock types.
  */
-class CommerceStockTypeListBuilder extends ConfigEntityListBuilder {
+class StockTypeListBuilder extends ConfigEntityListBuilder {
 
   /**
    * {@inheritdoc}

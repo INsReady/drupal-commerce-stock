@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\commerce_stock\Form\CommerceStockLocationDeleteForm.
+ * Contains \Drupal\commerce_stock\Form\StockLocationDeleteForm.
  */
 
 namespace Drupal\commerce_stock\Form;
@@ -14,7 +14,7 @@ use Drupal\Core\Url;
 /**
  * Provides a form for deleting a content_entity_example entity.
  */
-class CommerceStockLocationDeleteForm extends ContentEntityConfirmFormBase {
+class StockLocationDeleteForm extends ContentEntityConfirmFormBase {
 
   /**
    * {@inheritdoc}

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\commerce_stock\Form\CommerceStockTypeForm.
+ * Contains \Drupal\commerce_stock\Form\StockTypeForm.
  */
 
 namespace Drupal\commerce_stock\Form;
@@ -11,7 +11,7 @@ use Drupal\Core\Entity\BundleEntityFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 
-class CommerceStockTypeForm extends BundleEntityFormBase {
+class StockTypeForm extends BundleEntityFormBase {
 
   /**
    * {@inheritdoc}
@@ -32,7 +32,7 @@ class CommerceStockTypeForm extends BundleEntityFormBase {
       '#type' => 'machine_name',
       '#default_value' => $commerce_stock_type->id(),
       '#machine_name' => [
-        'exists' => '\Drupal\commerce_stock\Entity\CommerceStockType::load',
+        'exists' => '\Drupal\commerce_stock\Entity\StockType::load',
       ],
       '#maxlength' => EntityTypeInterface::BUNDLE_MAX_LENGTH,
     ];
