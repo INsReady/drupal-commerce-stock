@@ -20,7 +20,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   id = "commerce_stock",
  *   label = @Translation("Commerce stock"),
  *   handlers = {
- *     "storage" = "Drupal\commerce\ContentEntityStorage",
+ *     "storage" = "Drupal\commerce\CommerceContentEntityStorage",
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "form" = {

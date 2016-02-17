@@ -26,7 +26,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   id = "commerce_stock_location",
  *   label = @Translation("Commerce stock location"),
  *   handlers = {
- *     "storage" = "Drupal\commerce\ContentEntityStorage",
+ *     "storage" = "Drupal\commerce\CommerceContentEntityStorage",
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "list_builder" = "Drupal\commerce_stock\Entity\Controller\StockLocationListBuilder",
