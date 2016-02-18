@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\commerce_stock\Entity\Controller\StockLocationListBuilder.
- */
-
 namespace Drupal\commerce_stock\Entity\Controller;
 
 use Drupal\Core\Entity\EntityInterface;
