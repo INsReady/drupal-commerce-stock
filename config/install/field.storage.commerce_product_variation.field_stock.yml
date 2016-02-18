@@ -3,8 +3,8 @@ status: true
 dependencies:
   module:
     - commerce_product
-id: commerce_product_variation.field_stock
-field_name: field_stock
+id: commerce_product_variation.stock
+field_name: stock
 entity_type: commerce_product_variation
 type: entity_reference
 settings:
