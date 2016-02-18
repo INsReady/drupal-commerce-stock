@@ -1,8 +1,7 @@
-name: Commerce stock
+name: Commerce Stock
 description: 'Defines the stock entity and associated features.'
 package: Commerce
 type: module
-version: 1.0
 core: 8.x
 
 dependencies:
