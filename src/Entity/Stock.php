@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\commerce_stock\Entity\Stock.
- */
-
 namespace Drupal\commerce_stock\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;
@@ -61,7 +56,7 @@ class Stock extends ContentEntityBase {
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = self::entityKeysBaseFieldDefinitions($entity_type);
 
-    //库存的数量
+    // Stock on hand quantity
     $fields['quantity'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Quantity'))
       ->setDescription(t('The quantity of the product.'))
@@ -70,10 +65,10 @@ class Stock extends ContentEntityBase {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['store'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Store'))
-      ->setDescription(t('The stack of a store.'))
-      ->setSetting('target_type', 'commerce_store')
+    $fields['stock_location'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Stock Location'))
+      ->setDescription(t('The list of stock locations'))
+      ->setSetting('target_type', 'commerce_stock_location')
       ->setRequired(TRUE)
       ->setDisplayOptions('form', [
         'type' => 'options_select',

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: edxxu
- * Date: 2/17/16
- * Time: 8:56 PM
- */
 
 namespace Drupal\commerce_stock\Form;
 

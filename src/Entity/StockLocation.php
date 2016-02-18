@@ -1,15 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: edxxu
- * Date: 2/17/16
- * Time: 5:33 PM
- */
-
-/**
- * @file
- * Contains \Drupal\commerce_stock\Entity\StockLocation.
- */
 
 namespace Drupal\commerce_stock\Entity;
 
