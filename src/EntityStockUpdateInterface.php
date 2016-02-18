@@ -3,5 +3,5 @@
 namespace Drupal\commerce_stock;
 
 interface EntityStockUpdateInterface {
-  public function createTransaction($product_id, $location_id, $zone, $qry, $cost);
+  public function createTransaction($commerce_variant_id, $location_id, $qry);
 }

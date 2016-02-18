@@ -2,6 +2,7 @@
 
 namespace Drupal\commerce_stock\Entity;
 
+use Drupal\commerce_stock\StockLocationInterface;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -46,7 +47,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   }
  * )
  */
-class StockLocation extends ContentEntityBase {
+class StockLocation extends ContentEntityBase implements StockLocationInterface {
 
   use EntityChangedTrait, EntityKeysFieldsTrait;
 

@@ -2,8 +2,10 @@
 
 namespace Drupal\commerce_stock\Entity;
 
+use Drupal\commerce_stock\EntityStockUpdateInterface;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
+use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\entity\EntityKeysFieldsTrait;
@@ -39,7 +41,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   field_ui_base_route = "entity.commerce_stock_type.edit_form",
  * )
  */
-class Stock extends ContentEntityBase {
+class Stock extends ContentEntityBase implements EntityStockUpdateInterface {
 
   use EntityChangedTrait, EntityKeysFieldsTrait;
 
@@ -78,5 +80,53 @@ class Stock extends ContentEntityBase {
       ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function preSave(EntityStorageInterface $storage) {
+    parent::postSave($storage);
+
+    if ($this->isNew()) {
+      $original_stock = 0;
+    }
+    else {
+      $original_stock = $this->original->get('quantity')->value;
+    }
+
+    $new_stock = $this->get('quantity')->value;
+
+    if ($original_stock != $new_stock) {
+      $this->stock_delta = $new_stock - $original_stock;
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function postSave(EntityStorageInterface $storage, $update = TRUE) {
+    parent::postSave($storage, $update);
+
+    if (isset($this->stock_delta)) {
+      foreach ($this->referencedEntities() as $entity) {
+        if (is_subclass_of($entity, 'Drupal\commerce_stock\StockLocationInterface')) {
+          $stock_location_id = $entity->id();
+        }
+      }
+
+//      if (!$this->isNew()) {
+//        $query = \Drupal::entityQuery('commerce_product_variation');
+//
+//        $result = $query->condition('stock', $this->id())->execute();
+//      }
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function createTransaction($commerce_variant_id, $location_id, $qry) {
+
   }
 }

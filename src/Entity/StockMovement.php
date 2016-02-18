@@ -2,6 +2,7 @@
 
 namespace Drupal\commerce_stock\Entity;
 
+use Drupal\commerce_stock\EntityStockUpdateInterface;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -16,7 +17,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   label = @Translation("Commerce stock movement"),
  *   handlers = {
  *     "views_data" = "Drupal\views\EntityViewsData",
- *     "translation" = "Drupal\content_translation\ContentTranslationHandler"
+ *     "translation" = "Drupal\content_translation\ContentTranslationHandler",
  *     "list_builder" = "Drupal\commerce_stock\Entity\Controller\StockMovementListBuilder",
  *   },
  *   admin_permission = "administer stock entity",
