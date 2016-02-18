@@ -16,6 +16,6 @@ function commerce_stock_install() {
 
   \Drupal::configFactory()
     ->getEditable('core.entity_form_display.commerce_product_variation.default.default')
-    ->set('content.field_stock', $config)
+    ->set('content.stock', $config)
     ->save();
 }
