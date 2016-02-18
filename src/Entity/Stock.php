@@ -67,13 +67,18 @@ class Stock extends ContentEntityBase {
       ->setDescription(t('The quantity of the product.'))
       ->setRequired(TRUE)
       ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => 0,
+      ])
+      ->setSetting('placeholder', '')
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['store'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Store'))
-      ->setDescription(t('The stack of a store.'))
-      ->setSetting('target_type', 'commerce_store')
+    $fields['location'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Stock location'))
+      ->setDescription(t('The commerce stock location.'))
+      ->setSetting('target_type', 'commerce_stock_location')
       ->setRequired(TRUE)
       ->setDisplayOptions('form', [
         'type' => 'options_select',
