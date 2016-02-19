@@ -35,7 +35,6 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *     "id" = "stock_id",
  *     "bundle" = "type",
  *     "langcode" = "langcode",
- *     "uuid" = "uuid",
  *   },
  *   bundle_entity_type = "commerce_stock_type",
  *   field_ui_base_route = "entity.commerce_stock_type.edit_form",
@@ -90,6 +89,7 @@ class Stock extends ContentEntityBase implements EntityStockUpdateInterface {
 
     if ($this->isNew()) {
       $original_stock = 0;
+      $this->isNew = TRUE;
     }
     else {
       $original_stock = $this->original->get('quantity')->value;
@@ -115,18 +115,29 @@ class Stock extends ContentEntityBase implements EntityStockUpdateInterface {
         }
       }
 
-//      if (!$this->isNew()) {
-//        $query = \Drupal::entityQuery('commerce_product_variation');
-//
-//        $result = $query->condition('stock', $this->id())->execute();
-//      }
+      if (!$this->isNew) {
+        $query = \Drupal::entityQuery('commerce_product_variation');
+
+        $result = $query->condition('stock', $this->id())->execute();
+
+        if ($result) {
+          $commerce_variant_id = reset($result);
+          $this->createTransaction($commerce_variant_id, $stock_location_id, $this->stock_delta);
+        }
+      }
     }
   }
 
   /**
    * {@inheritdoc}
    */
-  public function createTransaction($commerce_variant_id, $location_id, $qry) {
-
+  public function createTransaction($commerce_variant_id, $location_id, $qty) {
+    $movement = $this->entityTypeManager()
+      ->getStorage('commerce_stock_movement')
+      ->create([
+        'variant_id' => $commerce_variant_id,
+        'qty' => $qty,
+      ]);
+    $movement->save();
   }
 }

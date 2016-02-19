@@ -12,13 +12,13 @@ entity.commerce_stock_location.collection:
   weight: 9
 
 commerce_stock.commerce_stock_movement.settings:
-  title: 'Stock Movement'
+  title: 'Stock movement'
   route_name: 'commerce_stock.commerce_stock_movement.settings'
   parent: 'commerce.configuration'
   description: 'Manage commerce stock movements.'
 
 entity.commerce_stock_movement.collection:
-  title: 'Stock Movements'
+  title: 'Stock movements'
   route_name: 'entity.commerce_stock_movement.collection'
   parent: 'commerce.admin_commerce'
   description: 'Manage commerce stock movements.'

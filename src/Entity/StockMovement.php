@@ -31,9 +31,6 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *     "uuid" = "uuid",
  *   },
  *   field_ui_base_route = "commerce_stock.commerce_stock_movement.settings",
- *   links = {
- *     "collection" = "/admin/commerce/commerce-stock-movement/list",
- *   }
  * )
  */
 class StockMovement extends ContentEntityBase {

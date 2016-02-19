@@ -14,16 +14,14 @@ class StockMovementListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['id'] = $this->t('Stock movement id');
-    return $header + parent::buildHeader();
+    return parent::buildHeader();
   }
 
   /**
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    $row['id'] = $entity->id();
-    return $row + parent::buildRow($entity);
+    return parent::buildRow($entity);
   }
 
 }
