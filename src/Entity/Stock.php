@@ -122,8 +122,7 @@ class Stock extends ContentEntityBase implements EntityStockUpdateInterface {
 
         if ($result) {
           $commerce_variant_id = reset($result);
-          $account = \Drupal::currentUser();
-          $this->createTransaction($commerce_variant_id, $stock_location_id, $this->stock_delta, $account->id());
+          $this->createTransaction($commerce_variant_id, $stock_location_id, $this->stock_delta);
         }
       }
     }
@@ -132,7 +131,11 @@ class Stock extends ContentEntityBase implements EntityStockUpdateInterface {
   /**
    * {@inheritdoc}
    */
-  public function createTransaction($commerce_variant_id, $location_id, $qty, $uid) {
+  public function createTransaction($commerce_variant_id, $location_id, $qty, $uid = 0) {
+    if (!$uid) {
+      $uid = \Drupal::currentUser()->id();
+    }
+
     $movement = $this->entityTypeManager()
       ->getStorage('commerce_stock_movement')
       ->create([
