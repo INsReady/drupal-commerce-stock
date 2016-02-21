@@ -31,7 +31,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   fieldable = TRUE,
  *   translatable = TRUE,
  *   base_table = "commerce_stock_location",
- *   data_table = "commerce_stock_field_location_data",
+ *   data_table = "commerce_stock_location_field_data",
  *   entity_keys = {
  *     "id" = "stock_location_id",
  *     "label" = "name",

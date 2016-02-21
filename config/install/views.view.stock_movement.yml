@@ -9,7 +9,7 @@ label: 'Stock movement'
 module: views
 description: ''
 tag: ''
-base_table: commerce_stock_movement_data
+base_table: commerce_stock_movement_field_data
 base_field: mid
 core: 8.x
 display:
@@ -101,7 +101,7 @@ display:
       fields:
         mid:
           id: mid
-          table: commerce_stock_movement_data
+          table: commerce_stock_movement_field_data
           field: mid
           relationship: none
           group_type: group
@@ -167,7 +167,7 @@ display:
           plugin_id: field
         variant_id:
           id: variant_id
-          table: commerce_stock_movement_data
+          table: commerce_stock_movement_field_data
           field: variant_id
           relationship: none
           group_type: group
@@ -233,7 +233,7 @@ display:
           plugin_id: field
         qty:
           id: qty
-          table: commerce_stock_movement_data
+          table: commerce_stock_movement_field_data
           field: qty
           relationship: none
           group_type: group

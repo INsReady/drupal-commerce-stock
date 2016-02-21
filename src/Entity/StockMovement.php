@@ -16,7 +16,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   id = "commerce_stock_movement",
  *   label = @Translation("Commerce stock movement"),
  *   handlers = {
- *     "views_data" = "Drupal\views\EntityViewsData",
+ *     "views_data" = "Drupal\commerce_stock\CommerceStockMovementViewsData",
  *     "translation" = "Drupal\content_translation\ContentTranslationHandler",
  *     "list_builder" = "Drupal\commerce_stock\Entity\Controller\StockMovementListBuilder",
  *   },
@@ -24,7 +24,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   fieldable = TRUE,
  *   translatable = TRUE,
  *   base_table = "commerce_stock_movement",
- *   data_table = "commerce_stock_movement_data",
+ *   data_table = "commerce_stock_movement_field_data",
  *   entity_keys = {
  *     "id" = "mid",
  *     "langcode" = "langcode",
@@ -44,8 +44,8 @@ class StockMovement extends ContentEntityBase {
     $fields = self::entityKeysBaseFieldDefinitions($entity_type);
 
     $fields['variant_id'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Comerce variant id'))
-      ->setDescription(t('The id of commerce variant which this movement belongs to.'))
+      ->setLabel(t('Product Variantion ID'))
+      ->setDescription(t('The id of commerce product variant which this movement belongs to.'))
       ->setSetting('unsigned', TRUE)
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
