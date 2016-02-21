@@ -2,7 +2,7 @@
 
 namespace Drupal\commerce_stock\Entity;
 
-use Drupal\commerce_stock\EntityStockUpdateInterface;
+use Drupal\commerce_stock\Entity\EntityStockUpdateInterface;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -51,9 +51,23 @@ class StockMovement extends ContentEntityBase {
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['qty'] = BaseFieldDefinition::create('decimal')
-      ->setLabel(t('The quantity'))
+      ->setLabel(t('Quantity'))
       ->setDescription(t('The quantity of this movement.'))
       ->setSetting('unsigned', FALSE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['location_id'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Stock Location ID'))
+      ->setDescription(t('The location id of a stock location where the change happens.'))
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['uid'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('User ID'))
+      ->setDescription(t('The user id of a user who is responsible for this change.'))
+      ->setSetting('unsigned', TRUE)
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 

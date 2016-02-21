@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\commerce_stock;
+namespace Drupal\commerce_stock\Entity;
 
 
 interface EntityStockCheckInterface {

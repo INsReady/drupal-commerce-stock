@@ -2,7 +2,7 @@
 
 namespace Drupal\commerce_stock\Entity;
 
-use Drupal\commerce_stock\EntityStockUpdateInterface;
+use Drupal\commerce_stock\Entity\EntityStockUpdateInterface;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityStorageInterface;
@@ -122,7 +122,8 @@ class Stock extends ContentEntityBase implements EntityStockUpdateInterface {
 
         if ($result) {
           $commerce_variant_id = reset($result);
-          $this->createTransaction($commerce_variant_id, $stock_location_id, $this->stock_delta);
+          $account = \Drupal::currentUser();
+          $this->createTransaction($commerce_variant_id, $stock_location_id, $this->stock_delta, $account->id());
         }
       }
     }
@@ -131,12 +132,14 @@ class Stock extends ContentEntityBase implements EntityStockUpdateInterface {
   /**
    * {@inheritdoc}
    */
-  public function createTransaction($commerce_variant_id, $location_id, $qty) {
+  public function createTransaction($commerce_variant_id, $location_id, $qty, $uid) {
     $movement = $this->entityTypeManager()
       ->getStorage('commerce_stock_movement')
       ->create([
         'variant_id' => $commerce_variant_id,
         'qty' => $qty,
+        'location_id' => $location_id,
+        'uid' => $uid,
       ]);
     $movement->save();
   }
