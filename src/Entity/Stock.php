@@ -144,6 +144,7 @@ class Stock extends ContentEntityBase implements EntityStockUpdateInterface {
         'location_id' => $location_id,
         'uid' => $uid,
       ]);
+
     $movement->save();
   }
 }
