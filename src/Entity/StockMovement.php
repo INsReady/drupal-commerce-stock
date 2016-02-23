@@ -33,7 +33,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   field_ui_base_route = "commerce_stock.commerce_stock_movement.settings",
  * )
  */
-class StockMovement extends ContentEntityBase {
+class StockMovement extends ContentEntityBase implements StockMovementInterface {
 
   use EntityChangedTrait, EntityKeysFieldsTrait;
 
