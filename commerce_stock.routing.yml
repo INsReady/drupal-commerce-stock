@@ -53,3 +53,11 @@ entity.commerce_stock_movement.collection:
     _title: 'Stock movement List'
   requirements:
     _permission: 'administer stock entity'
+
+commerce_stock.stock_manage_form:
+  path: '/admin/commerce/product-variant/{product_variation_id}/edit'
+  defaults:
+    _form: '\Drupal\commerce_stock\Form\StockManageForm'
+  requirements:
+    _permission: 'administer stock entity'
+    product_variation: \d+

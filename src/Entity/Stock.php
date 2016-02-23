@@ -40,10 +40,31 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   field_ui_base_route = "entity.commerce_stock_type.edit_form",
  * )
  */
-class Stock extends ContentEntityBase implements EntityStockUpdateInterface {
+class Stock extends ContentEntityBase implements StockInterface, EntityStockUpdateInterface {
 
   use EntityChangedTrait, EntityKeysFieldsTrait;
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getStockLocation() {
+    return $this->get('stock_location')->entity;
+  }
+
+  /**
+   * {@inhreitdoc}
+   */
+  public function getQuantity() {
+    return $this->get('quantity')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setQuantity($quantity) {
+    $this->set('quantity', $quantity);
+    return $this;
+  }
 
   /**
    * {@inheritdoc}
@@ -147,4 +168,5 @@ class Stock extends ContentEntityBase implements EntityStockUpdateInterface {
 
     $movement->save();
   }
+
 }
