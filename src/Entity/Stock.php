@@ -131,7 +131,7 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
 
     if (isset($this->stock_delta)) {
       foreach ($this->referencedEntities() as $entity) {
-        if (is_subclass_of($entity, 'Drupal\commerce_stock\StockLocationInterface')) {
+        if ($entity instanceof StockLocationInterface) {
           $stock_location_id = $entity->id();
         }
       }
