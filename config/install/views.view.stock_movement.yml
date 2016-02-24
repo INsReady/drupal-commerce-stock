@@ -4,6 +4,8 @@ dependencies:
   module:
     - commerce_stock
     - user
+_core:
+  default_config_hash: qSXkP_kSDXS5JroOXkVnncPmRAYKT5g5Ldg--fJaJmk
 id: stock_movement
 label: 'Stock movement'
 module: views
@@ -24,7 +26,7 @@ display:
         options:
           perm: 'administer stock entity'
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -300,9 +302,32 @@ display:
           entity_field: qty
           plugin_id: field
       filters: {  }
-      sorts: {  }
+      sorts:
+        mid:
+          id: mid
+          table: commerce_stock_movement_field_data
+          field: mid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: commerce_stock_movement
+          entity_field: mid
+          plugin_id: standard
       title: 'Stock movement'
-      header: {  }
+      header:
+        stock_management:
+          id: stock_management
+          table: views
+          field: stock_management
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          plugin_id: stock_management
       footer: {  }
       empty:
         area_text_custom:

@@ -61,3 +61,10 @@ commerce_stock.stock_manage_form:
   requirements:
     _permission: 'administer stock entity'
     product_variation: \d+
+
+commerce_stock.sku_autocomplete:
+  path: '/commerce-stock/sku-autocomplete'
+  defaults:
+    _controller: '\Drupal\commerce_stock\Controller\CommerceStockController::handleAutocomplete'
+  requirements:
+    _permission: 'access content'
