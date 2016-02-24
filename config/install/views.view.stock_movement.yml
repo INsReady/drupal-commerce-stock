@@ -447,7 +447,16 @@ display:
           entity_field: mid
           plugin_id: standard
       title: 'Stock movement'
-      header: {  }
+      header:
+        stock_management:
+          id: stock_management
+          table: views
+          field: stock_management
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          plugin_id: stock_management
       footer: {  }
       empty:
         area_text_custom:
