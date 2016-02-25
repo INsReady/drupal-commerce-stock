@@ -130,18 +130,13 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
     parent::postSave($storage, $update);
 
     if (isset($this->stock_delta)) {
-      foreach ($this->referencedEntities() as $entity) {
-        if ($entity instanceof StockLocationInterface) {
-          $stock_location_id = $entity->id();
-        }
-      }
-
       if (!$this->isNew) {
         $query = \Drupal::entityQuery('commerce_product_variation');
 
         $result = $query->condition('stock', $this->id())->execute();
 
         if ($result) {
+          $stock_location_id = $this->get('stock_location')->entity->id();
           $commerce_variant_id = reset($result);
           $this->createTransaction($commerce_variant_id, $stock_location_id, $this->stock_delta);
         }
