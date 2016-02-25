@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\commerce_stock\Entity\Stock;
+
 /**
  * @file
  * Defines common functionality for all Commerce Stock modules.
@@ -28,5 +30,35 @@ function commerce_stock_inline_entity_form_table_fields_alter(&$fields, $context
         'weight' => 101,
       );
    //}
+  }
+}
+
+/**
+ * We need to fill the missing variation id when a stock entity is created on a new variation
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *
+ */
+function commerce_stock_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+
+  if ($entity->getEntityTypeId() == 'commerce_product_variation') {
+    $stockList = $entity->stock;
+    foreach ($stockList as $stockItem) {
+      $stock_id = $stockItem->get('entity')->getTargetIdentifier();
+      $stock = Stock::load($stock_id);
+
+
+      $movement = Drupal::entityTypeManager()
+        ->getStorage('commerce_stock_movement')
+        ->create([
+          'variant_id' => $entity->id(),
+          'qty' => $stock->getQuantity(),
+          'location_id' => $stock->getStockLocation()->id(),
+          'uid' => \Drupal::currentUser()->id(),
+        ]);
+
+      $movement->save();
+      /*\Drupal::logger('my_module')->notice($stock);*/
+    }
   }
 }
