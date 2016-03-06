@@ -46,7 +46,7 @@ class StockMovement extends ContentEntityBase implements StockMovementInterface 
     $fields['variation_id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Product Variation ID'))
       ->setDescription(t('The id of commerce product variation which this movement belongs to.'))
-      ->setSetting('unsigned', TRUE)
+      ->setSetting('target_type', 'commerce_product_variation')
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
@@ -67,13 +67,33 @@ class StockMovement extends ContentEntityBase implements StockMovementInterface 
     $fields['uid'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('User ID'))
       ->setDescription(t('The user id of a user who is responsible for this change.'))
-      ->setSetting('unsigned', TRUE)
+      ->setSetting('target_type', 'user')
+      ->setSetting('handler', 'default')
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the movement happened.'));
+
+    $fields['description'] = BaseFieldDefinition::create('string')
+        ->setLabel(t('Description'))
+        ->setDescription(t('The description of this movement.'))
+        ->setSettings([
+            'default_value' => '',
+            'max_length' => 255,
+        ])
+        ->setDisplayOptions('view', [
+            'label' => 'hidden',
+            'type' => 'string',
+            'weight' => -5,
+        ])
+        ->setDisplayOptions('form', [
+            'type' => 'string_textfield',
+            'weight' => -5,
+        ])
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
   }

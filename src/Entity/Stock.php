@@ -138,7 +138,7 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
         if ($result) {
           $stock_location_id = $this->get('stock_location')->entity->id();
           $commerce_variation_id = reset($result);
-          $this->createTransaction($commerce_variation_id, $stock_location_id, $this->stock_delta);
+          $this->createTransaction($commerce_variation_id, $stock_location_id, $this->stock_delta, t('Stock Updated on Product Form.'));
         }
       }
     }
@@ -147,7 +147,7 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
   /**
    * {@inheritdoc}
    */
-  public function createTransaction($commerce_variation_id, $location_id, $qty, $uid = 0) {
+  public function createTransaction($commerce_variation_id, $location_id, $qty, $uid = 0, $des = '') {
     if (!$uid) {
       $uid = \Drupal::currentUser()->id();
     }
@@ -159,6 +159,7 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
         'qty' => $qty,
         'location_id' => $location_id,
         'uid' => $uid,
+        'description' => $des,
       ]);
 
     $movement->save();

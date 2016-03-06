@@ -55,6 +55,7 @@ function commerce_stock_entity_insert(Drupal\Core\Entity\EntityInterface $entity
           'qty' => $stock->getQuantity(),
           'location_id' => $stock->getStockLocation()->id(),
           'uid' => \Drupal::currentUser()->id(),
+          'description' => t('New Stock Created.'),
         ]);
 
       $movement->save();
