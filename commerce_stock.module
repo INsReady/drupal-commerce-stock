@@ -51,7 +51,7 @@ function commerce_stock_entity_insert(Drupal\Core\Entity\EntityInterface $entity
       $movement = Drupal::entityTypeManager()
         ->getStorage('commerce_stock_movement')
         ->create([
-          'variant_id' => $entity->id(),
+          'variation_id' => $entity->id(),
           'qty' => $stock->getQuantity(),
           'location_id' => $stock->getStockLocation()->id(),
           'uid' => \Drupal::currentUser()->id(),

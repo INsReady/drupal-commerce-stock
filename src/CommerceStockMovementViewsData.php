@@ -17,11 +17,11 @@ class CommerceStockMovementViewsData extends EntityViewsData {
     $data = parent::getViewsData();
 
     // Add the relationship to Product Variation
-    $data['commerce_stock_movement_field_data']['variant_id']['relationship']['id'] = 'standard';
-    $data['commerce_stock_movement_field_data']['variant_id']['relationship']['base'] = 'commerce_product_variation_field_data';
-    $data['commerce_stock_movement_field_data']['variant_id']['relationship']['base field'] = 'variation_id';
-    $data['commerce_stock_movement_field_data']['variant_id']['relationship']['title'] = $this->t('Product Variation');
-    $data['commerce_stock_movement_field_data']['variant_id']['relationship']['label'] = $this->t('Product Variations');
+    $data['commerce_stock_movement_field_data']['variation_id']['relationship']['id'] = 'standard';
+    $data['commerce_stock_movement_field_data']['variation_id']['relationship']['base'] = 'commerce_product_variation_field_data';
+    $data['commerce_stock_movement_field_data']['variation_id']['relationship']['base field'] = 'variation_id';
+    $data['commerce_stock_movement_field_data']['variation_id']['relationship']['title'] = $this->t('Product Variation');
+    $data['commerce_stock_movement_field_data']['variation_id']['relationship']['label'] = $this->t('Product Variations');
 
     // Add the relationship to User
     $data['commerce_stock_movement_field_data']['uid']['relationship']['id'] = 'standard';

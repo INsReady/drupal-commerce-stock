@@ -43,8 +43,8 @@ class StockMovement extends ContentEntityBase implements StockMovementInterface 
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = self::entityKeysBaseFieldDefinitions($entity_type);
 
-    $fields['variant_id'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Product Variantion ID'))
+    $fields['variation_id'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Product Variation ID'))
       ->setDescription(t('The id of commerce product variant which this movement belongs to.'))
       ->setSetting('unsigned', TRUE)
       ->setDisplayConfigurable('form', TRUE)

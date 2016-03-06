@@ -104,7 +104,7 @@ display:
           id: sku
           table: commerce_product_variation_field_data
           field: sku
-          relationship: variant_id
+          relationship: variation_id
           group_type: group
           admin_label: ''
           label: SKU
@@ -471,16 +471,16 @@ display:
           content: 'No movement available.'
           plugin_id: text_custom
       relationships:
-        variant_id:
-          id: variant_id
+        variation_id:
+          id: variation_id
           table: commerce_stock_movement_field_data
-          field: variant_id
+          field: variation_id
           relationship: none
           group_type: group
           admin_label: 'Product Variations'
           required: false
           entity_type: commerce_stock_movement
-          entity_field: variant_id
+          entity_field: variation_id
           plugin_id: standard
         uid:
           id: uid
