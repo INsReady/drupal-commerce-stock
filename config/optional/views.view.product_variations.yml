@@ -3,8 +3,8 @@ status: true
 dependencies:
   module:
     - commerce_product
-id: product_variants
-label: 'product variants'
+id: product_variations
+label: 'product variations'
 module: views
 description: ''
 tag: ''
@@ -275,7 +275,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/admin/commerce/product-variant/{{ variation_id }}/edit">Edit</a>'
+            text: '<a href="/admin/commerce/product-variation/{{ variation_id }}/edit">Edit</a>'
             make_link: false
             path: ''
             absolute: false
@@ -372,7 +372,7 @@ display:
           entity_field: sku
           plugin_id: string
       sorts: {  }
-      title: 'product variants'
+      title: 'product variations'
       header: {  }
       footer: {  }
       empty:
@@ -406,7 +406,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/commerce/product-variants
+      path: admin/commerce/product-variations
     cache_metadata:
       max-age: 0
       contexts:

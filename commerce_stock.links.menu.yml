@@ -24,9 +24,9 @@ entity.commerce_stock_movement.collection:
   description: 'Manage commerce stock movements.'
   weight: 9
 
-view.product_variants.page_1:
-  title: 'Stock Variants'
-  route_name: 'view.product_variants.page_1'
+view.product_variations.page_1:
+  title: 'Stock Variations'
+  route_name: 'view.product_variations.page_1'
   parent: 'commerce.admin_commerce'
-  description: 'Manage product variants.'
+  description: 'Manage product variations.'
   weight: 9
