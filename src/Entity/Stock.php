@@ -69,6 +69,14 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
   /**
    * {@inheritdoc}
    */
+  public function setChangeReason($reason) {
+    $this->changeReason = $reason;
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = self::entityKeysBaseFieldDefinitions($entity_type);
 
@@ -138,7 +146,10 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
         if ($result) {
           $stock_location_id = $this->get('stock_location')->entity->id();
           $commerce_variation_id = reset($result);
-          $this->createTransaction($commerce_variation_id, $stock_location_id, $this->stock_delta, 0, t('Stock Updated on Product Form.'));
+          if ($this->changeReason == NULL) {
+            $this->changeReason = 'Stock Updated on Product Form.';
+          }
+          $this->createTransaction($commerce_variation_id, $stock_location_id, $this->stock_delta, 0, $this->changeReason);
         }
       }
     }

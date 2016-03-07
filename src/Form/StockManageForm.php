@@ -81,7 +81,13 @@ class StockManageForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['sku'] = [
+    $form['manage_fieldset'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Manage Stocks'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+    );
+    $form['manage_fieldset']['sku'] = [
       '#type' => 'textfield',
       '#autocomplete_route_name' => 'commerce_stock.sku_autocomplete',
       '#required' => TRUE,
@@ -95,20 +101,36 @@ class StockManageForm extends FormBase {
       $options[$lid] = $location->get('name')->value;
     }
 
-    $form['location'] = [
+    $form['manage_fieldset']['location'] = [
       '#type' => 'select',
       '#options' => $options,
       '#required' => TRUE,
+      '#default_value' => $_SESSION['commerce_stock_movement_form_location_id'],
       '#title' => $this->t('Location'),
     ];
-    $form['quantity'] = [
+    $form['manage_fieldset']['quantity'] = [
       '#type' => 'number',
-      '#default_value' => 0,
+      '#default_value' => 1,
       '#required' => TRUE,
+      '#title' => $this->t('Qty Δ'),
     ];
-    $form['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Submit'),
+    $form['manage_fieldset']['description'] = [
+        '#type' => 'textfield',
+        '#default_value' => Null,
+        '#required' => FALSE,
+        '#title' => $this->t('Description'),
+    ];
+    $form['manage_fieldset']['sale'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Sale'),
+    ];
+    $form['manage_fieldset']['refill'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Refill'),
+    ];
+    $form['manage_fieldset']['submit'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Submit'),
     ];
 
     return $form;
@@ -141,12 +163,25 @@ class StockManageForm extends FormBase {
     $sku = $form_state->getValue('sku');
     $location_id = $form_state->getValue('location');
     $quantity = $form_state->getValue('quantity');
+    $des = $form_state->getValue('description');
+    $op = $form_state->getValue('op');
 
     $stock = $this->getStock($sku, $location_id);
 
+    if ($op == 'Sale') {
+      $quantity = abs($quantity) * -1;
+    } else if ($op == 'Refill') {
+      $quantity = abs($quantity);
+    }
+    if ($des == '') {
+      $des = $op;
+    }
+    $stock->setChangeReason($des);
     $stock->setQuantity($stock->getQuantity() + $quantity)->save();
 
-    drupal_set_message($this->t('Stocks has been saved.'));
+    $_SESSION['commerce_stock_movement_form_location_id'] = $location_id;
+
+    drupal_set_message($this->t('A stock has been saved.'));
   }
 
 }
