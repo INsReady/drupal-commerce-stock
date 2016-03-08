@@ -2,9 +2,9 @@ langcode: en
 status: true
 dependencies:
   module:
+    - commerce_price
     - commerce_product
     - commerce_stock
-_core:
 id: stock_on_hand
 label: 'Stock on hand'
 module: views
@@ -67,6 +67,67 @@ display:
           quantity: 9
       style:
         type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          override: true
+          sticky: false
+          caption: ''
+          summary: ''
+          description: ''
+          columns:
+            sku: sku
+            price__amount: price__amount
+            product_id: product_id
+            quantity: quantity
+            name: name
+            variation_id_1: variation_id_1
+          info:
+            sku:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            price__amount:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            product_id:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            quantity:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            name:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            variation_id_1:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          default: '-1'
+          empty_table: false
       row:
         type: fields
       fields:
@@ -134,6 +195,72 @@ display:
           field_api_classes: false
           entity_type: commerce_product_variation
           entity_field: sku
+          plugin_id: field
+        price__amount:
+          id: price__amount
+          table: commerce_product_variation_field_data
+          field: price__amount
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Price
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: amount
+          type: commerce_price_default
+          settings:
+            strip_trailing_zeroes: false
+            display_currency_code: false
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: commerce_product_variation
+          entity_field: price
           plugin_id: field
         product_id:
           id: product_id
@@ -273,7 +400,7 @@ display:
           relationship: stock_location
           group_type: group
           admin_label: ''
-          label: 'Stock Location Name'
+          label: 'Stock Location'
           exclude: false
           alter:
             alter_text: false
@@ -423,6 +550,13 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
+            autocomplete_filter: 0
+            autocomplete_min_chars: '0'
+            autocomplete_items: '10'
+            autocomplete_field: sku
+            autocomplete_raw_suggestion: 1
+            autocomplete_raw_dropdown: 1
+            autocomplete_dependent: 1
           is_grouped: false
           group_info:
             label: ''
@@ -479,8 +613,23 @@ display:
           entity_type: commerce_stock_location
           entity_field: stock_location_id
           plugin_id: commerce_stock_location
-      sorts: {  }
-      title: 'product variations'
+      sorts:
+        changed:
+          id: changed
+          table: commerce_product_variation_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          entity_type: commerce_product_variation
+          entity_field: changed
+          plugin_id: date
+      title: 'Stock on hand'
       header: {  }
       footer: {  }
       empty:
@@ -518,7 +667,7 @@ display:
           plugin_id: standard
       arguments: {  }
       display_extenders: {  }
-      use_ajax: true
+      use_ajax: false
     cache_metadata:
       max-age: 0
       contexts:
