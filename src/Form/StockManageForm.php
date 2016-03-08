@@ -94,7 +94,7 @@ class StockManageForm extends FormBase {
       '#title' => $this->t('SKU'),
     ];
 
-    $locations = $this->entityTypeManager->getStorage('commerce_stock_location')->loadMultiple();
+    $locations = \Drupal::entityTypeManager()->getStorage('commerce_stock_location')->loadMultiple();
 
     $options = [];
     foreach ($locations as $lid => $location) {
@@ -130,7 +130,7 @@ class StockManageForm extends FormBase {
     ];
     $form['manage_fieldset']['submit'] = [
         '#type' => 'submit',
-        '#value' => $this->t('Submit'),
+        '#value' => $this->t('General Action'),
     ];
 
     return $form;

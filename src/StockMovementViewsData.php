@@ -7,7 +7,7 @@ use Drupal\views\EntityViewsData;
 /**
  * Provides the views data for the commerce_stock_movement entity type.
  */
-class CommerceStockMovementViewsData extends EntityViewsData {
+class StockMovementViewsData extends EntityViewsData {
 
   /**
    * {@inheritdoc}
@@ -36,6 +36,12 @@ class CommerceStockMovementViewsData extends EntityViewsData {
     $data['commerce_stock_movement_field_data']['location_id']['relationship']['base field'] = 'stock_location_id';
     $data['commerce_stock_movement_field_data']['location_id']['relationship']['title'] = $this->t('Stock Locations');
     $data['commerce_stock_movement_field_data']['location_id']['relationship']['label'] = $this->t('Stock Locations');
+
+
+    // Add custom views filter to stock location
+    $data['commerce_stock_movement_field_data']['location_id']['filter']['id'] = 'commerce_stock_location';
+    $data['commerce_stock_location_field_data']['stock_location_id']['filter']['id'] = 'commerce_stock_location';
+
 
     return $data;
   }

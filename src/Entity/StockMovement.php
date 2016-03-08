@@ -16,7 +16,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   id = "commerce_stock_movement",
  *   label = @Translation("Commerce stock movement"),
  *   handlers = {
- *     "views_data" = "Drupal\commerce_stock\CommerceStockMovementViewsData",
+ *     "views_data" = "Drupal\commerce_stock\StockMovementViewsData",
  *     "translation" = "Drupal\content_translation\ContentTranslationHandler",
  *     "list_builder" = "Drupal\commerce_stock\Entity\Controller\StockMovementListBuilder",
  *   },

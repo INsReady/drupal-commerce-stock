@@ -64,8 +64,8 @@ class StockLocation extends ContentEntityBase implements StockLocationInterface 
     $fields = self::entityKeysBaseFieldDefinitions($entity_type);
 
     $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Comerce stock location name'))
-      ->setDescription(t('The name of the Commerce stock location.'))
+      ->setLabel(t('Stock Location Name'))
+      ->setDescription(t('The name of the stock location.'))
       ->setSettings(array(
         'default_value' => '',
         'max_length' => 255,
