@@ -40,8 +40,6 @@ class StockMovementViewsData extends EntityViewsData {
 
     // Add custom views filter to stock location
     $data['commerce_stock_movement_field_data']['location_id']['filter']['id'] = 'commerce_stock_location';
-    $data['commerce_stock_location_field_data']['stock_location_id']['filter']['id'] = 'commerce_stock_location';
-
 
     return $data;
   }

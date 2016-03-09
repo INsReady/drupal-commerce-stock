@@ -17,7 +17,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  *   handlers = {
  *     "storage" = "Drupal\commerce\CommerceContentEntityStorage",
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "views_data" = "Drupal\views\EntityViewsData",
+ *     "views_data" = "Drupal\commerce_stock\StockLocationViewsData",
  *     "list_builder" = "Drupal\commerce_stock\Entity\Controller\StockLocationListBuilder",
  *     "form" = {
  *       "add" = "Drupal\commerce_stock\Form\StockLocationForm",
