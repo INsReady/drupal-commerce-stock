@@ -50,6 +50,13 @@ class StockMovement extends ContentEntityBase implements StockMovementInterface 
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    $fields['stock_id'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Stock ID'))
+      ->setDescription(t('The id of a stock entity.'))
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
     $fields['qty'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity'))
       ->setDescription(t('The quantity of this movement.'))

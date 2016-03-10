@@ -7,14 +7,14 @@ use Drupal\commerce_stock\Entity\Stock;
  * Defines common functionality for all Commerce Stock modules.
  */
 
-
 /**
- * We need to fill the missing variation id when a stock entity is created on a new variation
+ * When a new stock instance is added to an existing product variation
  *
  * @param \Drupal\Core\Entity\EntityInterface $entity
  *
  */
-function commerce_stock_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+
+function commerce_stock_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
 
   if ($entity->getEntityTypeId() == 'commerce_product_variation') {
     $stockList = $entity->stock;
@@ -22,19 +22,25 @@ function commerce_stock_entity_insert(Drupal\Core\Entity\EntityInterface $entity
       $stock_id = $stockItem->get('entity')->getTargetIdentifier();
       $stock = Stock::load($stock_id);
 
+      // Check if a stock has movement, if none, then it's new.
+      $query = \Drupal::entityQuery('commerce_stock_movement');
 
-      $movement = Drupal::entityTypeManager()
-        ->getStorage('commerce_stock_movement')
-        ->create([
-          'variation_id' => $entity->id(),
-          'qty' => $stock->getQuantity(),
-          'location_id' => $stock->getStockLocation()->id(),
-          'uid' => \Drupal::currentUser()->id(),
-          'description' => t('New Stock Created.'),
-        ]);
+      $result = $query->condition('stock_id', $stock_id)->execute();
 
-      $movement->save();
-      /*\Drupal::logger('my_module')->notice($stock);*/
+      if (empty($result)) {
+        $movement = Drupal::entityTypeManager()
+          ->getStorage('commerce_stock_movement')
+          ->create([
+            'variation_id' => $entity->id(),
+            'stock_id' => $stock_id,
+            'qty' => $stock->getQuantity(),
+            'location_id' => $stock->getStockLocation()->id(),
+            'uid' => \Drupal::currentUser()->id(),
+            'description' => t('New Stock Created.'),
+          ]);
+
+        $movement->save();
+      }
     }
   }
 }
