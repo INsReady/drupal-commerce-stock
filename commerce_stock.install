@@ -8,8 +8,8 @@ function commerce_stock_install() {
     'weight' => 2,
     'settings' => [
       'override_labels' => FALSE,
-      'label_singular' => '',
-      'label_plural' => '',
+      'label_singular' => 'Stock',
+      'label_plural' => 'Stocks',
     ],
     'third_party_settings' => [],
   ];
