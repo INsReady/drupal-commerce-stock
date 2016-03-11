@@ -120,17 +120,25 @@ class StockManageForm extends FormBase {
         '#required' => FALSE,
         '#title' => $this->t('Description'),
     ];
-    $form['manage_fieldset']['sale'] = [
+    $form['manage_fieldset']['sell'] = [
         '#type' => 'submit',
-        '#value' => $this->t('Sale'),
+        '#value' => $this->t('Sell'),
     ];
-    $form['manage_fieldset']['refill'] = [
-        '#type' => 'submit',
-        '#value' => $this->t('Refill'),
+    $form['manage_fieldset']['return'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Return'),
     ];
-    $form['manage_fieldset']['submit'] = [
+    $form['manage_fieldset']['fill'] = [
         '#type' => 'submit',
-        '#value' => $this->t('General Action'),
+        '#value' => $this->t('Fill'),
+    ];
+    $form['manage_fieldset']['move'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Move'),
+    ];
+    $form['manage_fieldset']['delete'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Delete'),
     ];
 
     return $form;
@@ -168,9 +176,9 @@ class StockManageForm extends FormBase {
 
     $stock = $this->getStock($sku, $location_id);
 
-    if ($op == 'Sale') {
+    if ($op == 'Sell' || $op == 'Move' || $op == 'Delete') {
       $quantity = abs($quantity) * -1;
-    } else if ($op == 'Refill') {
+    } else if ($op == 'Fill' || $op == 'Return') {
       $quantity = abs($quantity);
     }
     if ($des == '') {
