@@ -24,6 +24,13 @@ entity.commerce_stock_movement.collection:
   description: 'Manage commerce stock movements.'
   weight: 9
 
+commerce_stock.inventory_control:
+  title: 'Inventory Control'
+  route_name: 'commerce_stock.inventory_control'
+  parent: 'commerce.admin_commerce'
+  description: 'Control inventory and oversee stock movements.'
+  weight: 9
+
 view.stock_on_hand.page_1:
   title: 'Stock on hand'
   route_name: 'view.stock_on_hand.page_1'

@@ -11,7 +11,7 @@ entity_type: commerce_product_variation
 bundle: default
 label: Stock
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

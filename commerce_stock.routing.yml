@@ -62,6 +62,13 @@ commerce_stock.stock_manage_form:
     _permission: 'administer stock entity'
     product_variation: \d+
 
+commerce_stock.inventory_control:
+  path: '/admin/commerce/commerce-stock-inventory'
+  defaults:
+    _form: '\Drupal\commerce_stock\Form\StockManageForm'
+  requirements:
+    _permission: 'administer stock entity'
+
 commerce_stock.sku_autocomplete:
   path: '/commerce-stock/sku-autocomplete'
   defaults:
