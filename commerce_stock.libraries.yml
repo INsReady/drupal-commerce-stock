@@ -1,0 +1,9 @@
+inventory_control:
+  version: 1.x
+  css:
+    theme:
+      css/inventory_control.css: {}
+  js:
+    js/inventory_control.js: {}
+  dependencies:
+      - core/jquery

@@ -65,7 +65,7 @@ commerce_stock.stock_manage_form:
 commerce_stock.inventory_control:
   path: '/admin/commerce/commerce-stock-inventory'
   defaults:
-    _form: '\Drupal\commerce_stock\Form\StockManageForm'
+    _controller: '\Drupal\commerce_stock\Controller\InventoryController::content'
   requirements:
     _permission: 'administer stock entity'
 
