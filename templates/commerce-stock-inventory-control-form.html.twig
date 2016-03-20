@@ -2,14 +2,13 @@
 
 <div class="span10">
     <div class="well">
-        <h1>Inventory Control</h1>
-
+        {{ form.location }}
         <div class="row-fluid">
 
             <div class="span4">
                 <div class="input-append transfer-barcode">
-                    <input class="" id="input-barcode" type="text" placeholder="M1-Red-XL">
-                    <button class="btn" type="button" id="button-add-item">Add</button>
+                    {{ form.sku }}
+                    <button class="button" type="button" id="button-add-item">Add</button>
                 </div>
             </div>
 
@@ -20,7 +19,7 @@
             <tr>
                 <th>SKU</th>
                 <th>Quantity</th>
-                <th>Options</th>
+                <th>Operations</th>
             </tr>
             </thead>
             <tbody></tbody>
@@ -29,13 +28,11 @@
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-stock-total">
             <tbody><tr>
                 <td>TOTAL</td>
-                <td class="table-transfers-total">150</td>
-                <td><textarea rows="2" class="span12 transfer-textarea" name="description" id="description" placeholder="Write comment here..."></textarea></td>
+                <td class="table-transfers-total">0</td>
+                <td>{{ form.description }}</td>
+                <td>{{ form.actions }}</td>
             </tr>
             </tbody></table>
-
-
-        <form class="pull-right" id="form-move-inventory" method="post"></form>
 
     </div><!--well-->
 </div>

@@ -1,17 +1,26 @@
 $ = jQuery;
 
+$('.stock-inventory-control-form').keypress (
+  function(event){
+    if (event.which == '13') {
+      event.preventDefault();
+    }
+  }
+);
+
 $(function(){
   $('label.tree-toggler').click(function () {
     $(this).parent().children('ul.tree').toggle(300);
   });
 
-  $('input#input-barcode').focus(); // focus to add input upon loading
+  $('input#edit-sku').focus(); // focus to add input upon loading
 
 
-  $("#input-barcode").bind('keypress', function(e) {
+  $("#edit-sku").bind('keypress', function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
     if(e.keyCode==13) {
       typingDone();
+      calculateTotalQuantity();
     }
   });
 
@@ -30,11 +39,11 @@ $(function(){
   });
 
   function typingDone() {
-    $("#input-barcode").blur();
-    var SKU = $("#input-barcode").val();
+    $("#edit-sku").blur();
+    var SKU = $("#edit-sku").val();
     addProduct(SKU);
-    $("#input-barcode").val("");
-    $("#input-barcode").focus();
+    $("#edit-sku").val("");
+    $("#edit-sku").focus();
   }
 
   function addProduct(sku) {
@@ -45,19 +54,19 @@ $(function(){
     }
     else {
       var preHTML = '<tr>';
-      var postHTML = '<td><button class="btn btn-mini btn-danger delete-item-button" type="button"><i class="icon-remove-sign icon-white"></i> Delete</button></td>';
+      var postHTML = '<td><button class="button btn-danger delete-item-button" type="button"><i class="icon-remove-sign icon-white"></i> Remove</button></td>';
       $("#item-table").append(
         preHTML +
-        '<td class="sku">' + sku + '</th>' +
-        '<td class="quantity"><input type="number" class="span12" value="' + '1' + '" /></th>' +
+        '<td class="sku">' + '<input type="text" class="form-text required" value="' + sku + '" READONLY />' + '</th>' +
+        '<td class="quantity"><input type="number" class="form-number required" value="' + '1' + '" /></th>' +
         postHTML);
     }
   }
 
   function getItemPosition(sku) {
     var x = -1;
-    $( "#item-table .sku" ).each(function( index ) {
-      if(sku == $(this).text())
+    $( "#item-table .sku input" ).each(function( index ) {
+      if(sku == $(this).val())
         x = index;
     });
     return x;

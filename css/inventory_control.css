@@ -1,0 +1,77 @@
+.stock-manage-form .form-item {
+  display: inline-block;
+  font-size: 1.1em;
+  margin: 5px;
+}
+
+.stock-inventory-control-form input[type="submit"] {
+  border-radius: 5px;
+  padding: 20px 0 20px 20px;
+  font-size: 1.5em;
+  margin: 5px;
+  width: 140px;
+  color: #fff;
+}
+
+.stock-inventory-control-form .form-text {
+  max-width: 300px;
+}
+
+.stock-inventory-control-form .form-number {
+  max-width: 65px;
+}
+
+#edit-sell {
+  background: #5cb85c url('/modules/ics_custom/images/sell.svg') no-repeat 30px;
+  border-color: #4cae4c;
+}
+
+#edit-sell:hover {
+  background-color: #449d44;
+  border-color: #398439;
+}
+
+#edit-return {
+  background: #f0ad4e url('/modules/ics_custom/images/return.svg') no-repeat 15px;
+  border-color: #eea236;
+}
+
+#edit-return:hover {
+  background-color: #ec971f;
+  border-color: #985f0d;
+}
+
+#edit-fill {
+  background: #5bc0de url('/modules/ics_custom/images/fill.svg') no-repeat 30px;
+  border-color: #46b8da;
+}
+
+#edit-fill:hover {
+  background-color: #31b0d5;
+  border-color: #269abc;
+}
+
+#edit-move {
+  background: #337ab7 url('/modules/ics_custom/images/move.svg') no-repeat 20px;
+  border-color: #2e6da4;
+}
+
+#edit-move:hover {
+  background-color: #286090;
+  border-color: #204d74;
+}
+
+#edit-delete {
+  background: #d9534f url('/modules/ics_custom/images/delete.svg') no-repeat 10px;
+  border-color: #d43f3a;
+}
+
+#edit-delete:hover {
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+
+.views-exposed-form .form-actions {
+  display: inline-block;
+  margin-top: 35px;
+}
