@@ -38,14 +38,6 @@ entity.commerce_stock_location.delete_form:
   requirements:
     _permission: 'administer stock entity'
 
-commerce_stock.commerce_stock_movement.settings:
-  path: '/admin/commerce/commerce-stock-location/settings'
-  defaults:
-    _form: '\Drupal\commerce_stock\Form\StockMovementSettingsForm'
-    _title: 'Commerce stock movement Settings'
-  requirements:
-    _permission: 'administer stock entity'
-
 entity.commerce_stock_movement.collection:
   path: '/admin/commerce/stock-inventory/movement/'
   defaults:
