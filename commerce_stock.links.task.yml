@@ -3,7 +3,12 @@ entity.commerce_stock_type.edit_form:
   base_route: entity.commerce_stock_type.edit_form
   title: Edit
 
-commerce_stock.commerce_stock_movement.settings:
-  route_name: commerce_stock.commerce_stock_movement.settings
-  title: 'Settings'
-  base_route: commerce_stock.commerce_stock_movement.settings
+commerce_stock.inventory_control:
+  route_name: commerce_stock.inventory_control
+  base_route: commerce_stock.inventory_control
+  title: 'Operations'
+
+entity.commerce_stock_movement.collection:
+  route_name: entity.commerce_stock_movement.collection
+  base_route: commerce_stock.inventory_control
+  title: 'Stock movement'
