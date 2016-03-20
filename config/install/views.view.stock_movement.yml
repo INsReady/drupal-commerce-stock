@@ -48,10 +48,15 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 10
+          items_per_page: 50
           offset: 0
           id: 0
           total_pages: null
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -60,11 +65,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          tags:
-            previous: '‹ Previous'
-            next: 'Next ›'
-            first: '« First'
-            last: 'Last »'
           quantity: 9
       style:
         type: table
@@ -219,7 +219,7 @@ display:
             thousand_separator: ','
             prefix_suffix: false
             decimal_separator: .
-            scale: 2
+            scale: 0
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -553,16 +553,7 @@ display:
           entity_field: mid
           plugin_id: standard
       title: 'Stock movement'
-      header:
-        stock_management:
-          id: stock_management
-          table: views
-          field: stock_management
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          plugin_id: stock_management
+      header: {  }
       footer: {  }
       empty:
         area_text_custom:
@@ -628,7 +619,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/commerce/commerce-stock-movement/list
+      path: admin/commerce/stock-inventory/movement
     cache_metadata:
       max-age: 0
       contexts:

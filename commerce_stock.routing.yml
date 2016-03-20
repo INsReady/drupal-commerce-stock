@@ -47,23 +47,15 @@ commerce_stock.commerce_stock_movement.settings:
     _permission: 'administer stock entity'
 
 entity.commerce_stock_movement.collection:
-  path: '/admin/commerce/commerce-stock-movement/list'
+  path: '/admin/commerce/stock-inventory/movement/'
   defaults:
     _entity_list: 'commerce_stock_movement'
-    _title: 'Stock movement List'
+    _title: 'Stock movement'
   requirements:
     _permission: 'administer stock entity'
-
-commerce_stock.stock_manage_form:
-  path: '/admin/commerce/product-variation/{product_variation_id}/edit'
-  defaults:
-    _form: '\Drupal\commerce_stock\Form\StockManageForm'
-  requirements:
-    _permission: 'administer stock entity'
-    product_variation: \d+
 
 commerce_stock.inventory_control:
-  path: '/admin/commerce/commerce-stock-inventory'
+  path: '/admin/commerce/stock-inventory'
   defaults:
     _form: '\Drupal\commerce_stock\Form\StockInventoryControlForm'
     _title: 'Inventory Control'
