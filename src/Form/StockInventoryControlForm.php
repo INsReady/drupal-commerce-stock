@@ -4,6 +4,7 @@ namespace Drupal\commerce_stock\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Database\Database;
 
 class StockInventoryControlForm extends FormBase {
 
@@ -19,7 +20,6 @@ class StockInventoryControlForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['#theme'] = array('commerce_stock_inventory_control_form');
-    $form['#test_var'] = 'Looking for a way to render dropdown';
 
     $form['sku'] = [
       '#type' => 'textfield',
@@ -85,10 +85,81 @@ class StockInventoryControlForm extends FormBase {
   /**
    * {@inheritdoc}
    */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $skus = $form_state->getUserInput()['sku'];
+
+    foreach ($skus as $pos => $sku) {
+
+      $exist = $this->validateSku($sku);
+
+      if (!$exist) {
+        $form_state->setErrorByName('sku', $this->t('SKU: @sku doesn\'t exist.', ['@sku' => $sku]));
+      }
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $op = $form_state->getValue('op');
     $des = $form_state->getValue('description');
+    $location_id = $form_state->getValue('location');
+    $skus = $form_state->getUserInput()['sku'];
+    $quantities = $form_state->getUserInput()['qty'];
+
+    foreach ($skus as $pos => $sku) {
+      $stock = $this->getStock($sku, $location_id);
+
+      if ($op == 'Sell' || $op == 'Move' || $op == 'Delete') {
+        $quantity = abs($quantities[$pos]) * -1;
+      } else if ($op == 'Fill' || $op == 'Return') {
+        $quantity = abs($quantities[$pos]);
+      }
+      if ($des == '') {
+        $des = $op;
+      }
+      $stock->setChangeReason($des);
+      $stock->setQuantity($stock->getQuantity() + $quantity)->save();
+    }
+
+    $_SESSION['commerce_stock_movement_form_location_id'] = $location_id;
+
+    drupal_set_message($this->t('Operation: ' . $op . ' succeeded!'));
 
   }
 
+  /**
+   * If a sku exists in database.
+   *
+   * @param $sku
+   */
+  protected function validateSku($sku) {
+    $result = \Drupal::entityQuery('commerce_product_variation')
+      ->condition('sku', $sku)
+      ->condition('status', 1)
+      ->execute();
+
+    return $result ? TRUE : FALSE;
+  }
+
+  /**
+   *
+   * @return \Drupal\commerce_stock\Entity\StockInterface
+   */
+  protected function getStock($sku, $location_id) {
+    $connection = Database::getConnection('default', NULL);
+    $query = $connection->select('commerce_product_variation__stock', 'cs');
+    $query->join('commerce_product_variation_field_data', 'cr', 'cr.variation_id=cs.entity_id');
+    $query->join('commerce_stock_field_data', 'csf', 'csf.stock_id=cs.stock_target_id');
+    $query->fields('cs', ['stock_target_id']);
+    $query->condition('cr.sku', $sku);
+    $query->condition('csf.stock_location', $location_id);
+
+    $stock_id = $query->execute()->fetchField();
+
+    return \Drupal::entityTypeManager()->getStorage('commerce_stock')->load($stock_id);
+  }
+
 }
+
