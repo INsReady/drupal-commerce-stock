@@ -22,7 +22,7 @@
 }
 
 #edit-sell {
-  background: #5cb85c url('/modules/ics_custom/images/sell.svg') no-repeat 30px;
+  background: #5cb85c url('/modules/commerce_stock/images/sell.svg') no-repeat 30px;
   border-color: #4cae4c;
 }
 
@@ -32,7 +32,7 @@
 }
 
 #edit-return {
-  background: #f0ad4e url('/modules/ics_custom/images/return.svg') no-repeat 15px;
+  background: #f0ad4e url('/modules/commerce_stock/images/return.svg') no-repeat 15px;
   border-color: #eea236;
 }
 
@@ -42,7 +42,7 @@
 }
 
 #edit-fill {
-  background: #5bc0de url('/modules/ics_custom/images/fill.svg') no-repeat 30px;
+  background: #5bc0de url('/modules/commerce_stock/images/fill.svg') no-repeat 30px;
   border-color: #46b8da;
 }
 
@@ -52,7 +52,7 @@
 }
 
 #edit-move {
-  background: #337ab7 url('/modules/ics_custom/images/move.svg') no-repeat 20px;
+  background: #337ab7 url('/modules/commerce_stock/images/move.svg') no-repeat 20px;
   border-color: #2e6da4;
 }
 
@@ -62,7 +62,7 @@
 }
 
 #edit-delete {
-  background: #d9534f url('/modules/ics_custom/images/delete.svg') no-repeat 10px;
+  background: #d9534f url('/modules/commerce_stock/images/delete.svg') no-repeat 10px;
   border-color: #d43f3a;
 }
 
