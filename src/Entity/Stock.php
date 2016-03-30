@@ -8,7 +8,6 @@ use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\entity\EntityKeysFieldsTrait;
 
 /**
  * Defines the stock entity class.
@@ -16,6 +15,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  * @ContentEntityType(
  *   id = "commerce_stock",
  *   label = @Translation("Commerce stock"),
+ *   bundle_label = @Translation("Commerce stock type"),
  *   handlers = {
  *     "storage" = "Drupal\commerce\CommerceContentEntityStorage",
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
@@ -42,7 +42,7 @@ use Drupal\entity\EntityKeysFieldsTrait;
  */
 class Stock extends ContentEntityBase implements StockInterface, EntityStockUpdateInterface {
 
-  use EntityChangedTrait, EntityKeysFieldsTrait;
+  use EntityChangedTrait;
 
   /**
    * {@inheritdoc}
@@ -78,7 +78,7 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
-    $fields = self::entityKeysBaseFieldDefinitions($entity_type);
+    $fields = parent::baseFieldDefinitions($entity_type);
 
     // Stock on hand quantity
     $fields['quantity'] = BaseFieldDefinition::create('integer')

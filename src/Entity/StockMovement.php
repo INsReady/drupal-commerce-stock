@@ -7,7 +7,6 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\entity\EntityKeysFieldsTrait;
 
 /**
  * Defines the commerce_stock_movement entity class.
@@ -35,13 +34,13 @@ use Drupal\entity\EntityKeysFieldsTrait;
  */
 class StockMovement extends ContentEntityBase implements StockMovementInterface {
 
-  use EntityChangedTrait, EntityKeysFieldsTrait;
+  use EntityChangedTrait;
 
   /**
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
-    $fields = self::entityKeysBaseFieldDefinitions($entity_type);
+    $fields = parent::baseFieldDefinitions($entity_type);
 
     $fields['variation_id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Product Variation ID'))
