@@ -2,9 +2,11 @@
 
 namespace Drupal\commerce_stock\Form;
 
+use Drupal\commerce_stock\Entity\Stock;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Database\Database;
+use Drupal\commerce_product\Entity\ProductVariation;
 
 class StockInventoryControlForm extends FormBase {
 
@@ -113,8 +115,29 @@ class StockInventoryControlForm extends FormBase {
 
       if ($op == 'Sell' || $op == 'Move' || $op == 'Delete') {
         $quantity = abs($quantities[$pos]) * -1;
-      } else if ($op == 'Fill' || $op == 'Return') {
+      } else if ($op == 'Return') {
         $quantity = abs($quantities[$pos]);
+      } else if ($op == 'Fill') {
+        $quantity = abs($quantities[$pos]);
+
+        // If there is no stock entity set up at the specific location, creates one
+        if (!isset($stock)) {
+          $stock = Stock::create([
+            'type' => 'default',
+            'langcode' => 'en',
+            'quantity' => $quantity,
+            'stock_location' => $location_id,
+          ]);
+          $stock->save();
+
+          // Update the product variation for the entity reference
+          $query = \Drupal::entityQuery('commerce_product_variation');
+          $variationIDs = $query->condition('sku', $sku)->execute();
+          $productVariation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load(current($variationIDs));
+          $productVariation->stock->appendItem($stock);
+          $productVariation->save();
+          break;
+        }
       }
       if ($des == '') {
         $des = $op;

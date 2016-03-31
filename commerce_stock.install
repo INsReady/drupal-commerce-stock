@@ -7,7 +7,7 @@ function commerce_stock_install() {
     'type' => 'inline_entity_form_simple',
     'weight' => 2,
     'settings' => [
-      'override_labels' => FALSE,
+      'override_labels' => TRUE,
       'label_singular' => 'Stock',
       'label_plural' => 'Stocks',
     ],
