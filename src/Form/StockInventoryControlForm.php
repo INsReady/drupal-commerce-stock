@@ -146,7 +146,7 @@ class StockInventoryControlForm extends FormBase {
           $productVariation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load(current($variationIDs));
           $productVariation->stock->appendItem($stock);
           $productVariation->save();
-          break;
+          continue;
         }
       }
       if ($des == '') {
