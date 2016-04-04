@@ -24,6 +24,7 @@ display:
         type: perm
         options:
           perm: 'access commerce administration pages'
+
       cache:
         type: tag
         options: {  }
@@ -414,8 +415,8 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
-            custom_date_format: ''
+            date_format: custom
+            custom_date_format: 'Y-m-d H:i'
             timezone: ''
           group_column: value
           group_columns: {  }
@@ -537,6 +538,52 @@ display:
           entity_type: commerce_stock_movement
           entity_field: location_id
           plugin_id: commerce_stock_location
+        changed:
+          id: changed
+          table: commerce_stock_movement_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: between
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: changed_op
+            label: 'Filter By Date Range'
+            description: ''
+            use_operator: false
+            operator: changed_op
+            identifier: changed
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              bu: '0'
+              sto: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: commerce_stock_movement
+          entity_field: changed
+          plugin_id: date
       sorts:
         mid:
           id: mid
