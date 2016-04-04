@@ -34,8 +34,18 @@ class StockInventoryControlForm extends FormBase {
     $locations = \Drupal::entityTypeManager()->getStorage('commerce_stock_location')->loadMultiple();
 
     $options = [];
+    $user = \Drupal::currentUser();
     foreach ($locations as $lid => $location) {
-      $options[$lid] = $location->get('name')->value;
+      if ($user->hasPermission('administer stock entity') || $user->hasPermission('edit stock entity at any location')) {
+        $options[$lid] = $location->get('name')->value;
+      } else if ($user->hasPermission('edit stock entity at own location')) {
+        $uids = $location->get('uid');
+        foreach ($uids as $manager) {
+          if ($manager->target_id == $user->id()) {
+            $options[$lid] = $location->get('name')->value;
+          }
+        }
+      }
     }
 
     $form['location'] = [
@@ -185,4 +195,3 @@ class StockInventoryControlForm extends FormBase {
   }
 
 }
-

@@ -12,7 +12,7 @@ entity.commerce_stock_location.collection:
     _entity_list: 'commerce_stock_location'
     _title: 'Commerce stock locations'
   requirements:
-    _permission: 'administer stock entity'
+    _permission: 'administer stock locations'
 
 entity.commerce_stock_location.add_form:
   path: '/admin/commerce/commerce-stock-location/add'
@@ -20,7 +20,7 @@ entity.commerce_stock_location.add_form:
     _entity_form: 'commerce_stock_location.add'
     _title: 'Add Commerce stock location'
   requirements:
-    _permission: 'administer stock entity'
+    _permission: 'administer stock locations'
 
 entity.commerce_stock_location.edit_form:
   path: '/admin/commerce/commerce-stock-location/{commerce_stock_location}/edit'
@@ -28,7 +28,7 @@ entity.commerce_stock_location.edit_form:
     _entity_form: 'commerce_stock_location.edit'
     _title: 'Edit Commerce stock location'
   requirements:
-    _permission: 'administer stock entity'
+    _permission: 'administer stock locations'
 
 entity.commerce_stock_location.delete_form:
   path: '/admin/commerce/commerce-stock-location/{commerce_stock_location}/delete'
@@ -36,7 +36,7 @@ entity.commerce_stock_location.delete_form:
     _entity_form: 'commerce_stock_location.delete'
     _title: 'Delete Commerce stock location'
   requirements:
-    _permission: 'administer stock entity'
+    _permission: 'administer stock locations'
 
 entity.commerce_stock_movement.collection:
   path: '/admin/commerce/stock-inventory/movement/'
@@ -44,7 +44,7 @@ entity.commerce_stock_movement.collection:
     _entity_list: 'commerce_stock_movement'
     _title: 'Stock movement'
   requirements:
-    _permission: 'administer stock entity'
+    _permission: 'view stock movement at any location+view stock movement at own location'
 
 commerce_stock.inventory_control:
   path: '/admin/commerce/stock-inventory'
@@ -52,7 +52,7 @@ commerce_stock.inventory_control:
     _form: '\Drupal\commerce_stock\Form\StockInventoryControlForm'
     _title: 'Inventory Control'
   requirements:
-    _permission: 'administer stock entity'
+    _permission: 'edit stock entity at any location+edit stock entity at own location'
 
 commerce_stock.sku_autocomplete:
   path: '/commerce-stock/sku-autocomplete'

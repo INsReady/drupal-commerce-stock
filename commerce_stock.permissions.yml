@@ -7,13 +7,25 @@
 'view stock entity':
   title: 'View stock content'
 
-'edit stock entity':
-  title: 'Edit stock content'
+'edit stock entity at any location':
+  title: 'Edit stock content at any location'
+
+'edit stock entity at own location':
+  title: 'Edit stock content at own location'
 
 'administer stock entity':
-  title: 'Administer stock settings'
+  title: 'Administer stock entity settings'
+
+'administer stock locations':
+  title: 'Administer stock locations'
 
 'administer commerce stock types':
   title: 'Administer commerce stock types'
   description: 'Allows users to administer commerce stock types.'
   'restrict access': TRUE
+
+'view stock movement at any location':
+  title: 'View stock movement at any location'
+
+'view stock movement at own location':
+  title: 'View stock movement at own location'

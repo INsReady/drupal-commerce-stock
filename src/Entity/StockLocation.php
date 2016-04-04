@@ -60,36 +60,6 @@ class StockLocation extends ContentEntityBase implements StockLocationInterface 
   /**
    * {@inheritdoc}
    */
-  public function getManager() {
-    return $this->get('uid')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setManager(UserInterface $account) {
-    $this->set('uid', $account->id());
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getManagerId() {
-    return $this->get('uid')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setManagerId($uid) {
-    $this->set('uid', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
