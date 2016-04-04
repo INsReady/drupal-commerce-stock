@@ -23,9 +23,9 @@ display:
       access:
         type: perm
         options:
-          perm: 'administer stock entity'
+          perm: 'access commerce administration pages'
       cache:
-        type: none
+        type: tag
         options: {  }
       query:
         type: views_query

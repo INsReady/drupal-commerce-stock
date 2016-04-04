@@ -1,6 +1,9 @@
 <?php
 
 use Drupal\commerce_stock\Entity\Stock;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\Views;
 
 /**
  * @file
@@ -51,4 +54,27 @@ function commerce_stock_theme($existing, $type, $theme, $path) {
       'render element' => 'form',
     ],
   ];
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function commerce_stock_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+
+  if ($view->id() == 'stock_movement') {
+    $user = \Drupal::currentUser();
+    if ($user->hasPermission('view stock movement at own location') && !$user->hasPermission('view stock movement at any location')) {
+      // Create a new join to relate the 'commerce_stock_location__uid' table to our current 'commerce_stock_location' table.
+      $definition = array(
+        'table' => 'commerce_stock_location__uid',
+        'field' => 'entity_id',
+        'left_table' => 'commerce_stock_location_field_data_commerce_stock_movement_field_data',
+        'left_field' => 'stock_location_id',
+      );
+      $join = Views::pluginManager('join')->createInstance('standard', $definition);
+
+      $alias = $query->addRelationship('commerce_stock_location__uid', $join, 'commerce_stock_location_field_data');
+      $query->addWhere(0, 'uid_target_id', $user->id(), '=');
+    }
+  }
 }
