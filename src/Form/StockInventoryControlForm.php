@@ -52,7 +52,7 @@ class StockInventoryControlForm extends FormBase {
       '#type' => 'select',
       '#options' => $options,
       '#required' => TRUE,
-      '#default_value' => $_SESSION['commerce_stock_movement_form_location_id'],
+      '#default_value' => isset($_SESSION['commerce_stock_movement_form_location_id']) ? $_SESSION['commerce_stock_movement_form_location_id'] : NULL,
       '#title' => $this->t('Stock Location'),
     ];
 
@@ -125,35 +125,35 @@ class StockInventoryControlForm extends FormBase {
 
       if ($op == 'Sell' || $op == 'Move' || $op == 'Delete') {
         $quantity = abs($quantities[$pos]) * -1;
-      } else if ($op == 'Return') {
+      } else if ($op == 'Return' || $op == 'Fill') {
         $quantity = abs($quantities[$pos]);
-      } else if ($op == 'Fill') {
-        $quantity = abs($quantities[$pos]);
-
-        // If there is no stock entity set up at the specific location, creates one
-        if (!isset($stock)) {
-          $stock = Stock::create([
-            'type' => 'default',
-            'langcode' => 'en',
-            'quantity' => $quantity,
-            'stock_location' => $location_id,
-          ]);
-          $stock->save();
-
-          // Update the product variation for the entity reference
-          $query = \Drupal::entityQuery('commerce_product_variation');
-          $variationIDs = $query->condition('sku', $sku)->execute();
-          $productVariation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load(current($variationIDs));
-          $productVariation->stock->appendItem($stock);
-          $productVariation->save();
-          continue;
-        }
       }
+
       if ($des == '') {
         $des = $op;
       }
-      $stock->setChangeReason($des);
-      $stock->setQuantity($stock->getQuantity() + $quantity)->save();
+
+      // If there is no stock entity set up at the specific location, creates one
+      if (!isset($stock)) {
+        $stock = Stock::create([
+          'type' => 'default',
+          'langcode' => 'en',
+          'quantity' => $quantity,
+          'stock_location' => $location_id,
+        ]);
+        $stock->setChangeReason($des);
+        $stock->save();
+
+        // Update the product variation for the entity reference
+        $query = \Drupal::entityQuery('commerce_product_variation');
+        $variationIDs = $query->condition('sku', $sku)->execute();
+        $productVariation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load(current($variationIDs));
+        $productVariation->stock->appendItem($stock);
+        $productVariation->save();
+      } else {
+        $stock->setChangeReason($des);
+        $stock->setQuantity($stock->getQuantity() + $quantity)->save();
+      }
     }
 
     $_SESSION['commerce_stock_movement_form_location_id'] = $location_id;
