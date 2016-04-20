@@ -91,6 +91,16 @@ class StockInventoryControlForm extends FormBase {
       '#value' => $this->t('Delete'),
     ];
 
+    $form['values'] = [
+      '#type' => 'table',
+      '#header' => [
+        $this->t('SKU'),
+        $this->t('Quantity'),
+        $this->t('Operations'),
+      ],
+    ];
+
+
     return $form;
   }
 
@@ -98,14 +108,31 @@ class StockInventoryControlForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $skus = $form_state->getUserInput()['sku'];
 
-    foreach ($skus as $pos => $sku) {
+    foreach ($form_state->getValue('values') as $pos => $row) {
+      $value_form = &$form['values'][$pos];
+      $value_form['sku'] = [
+        '#type' => 'textfield',
+        '#default_value' => $row['sku'],
+        '#attributes' => ['readonly' => 'readonly'],
+        '#prefix' => '<div class="sku">',
+        '#suffix' => '</div>'
+      ];
+      $value_form['quantity'] = [
+        '#type' => 'number',
+        '#default_value' => $row['quantity'],
+        '#required' => TRUE,
+        '#prefix' => '<div class="quantity">',
+        '#suffix' => '</div>'
+      ];
+      $value_form['remove'] = [
+        '#markup' => '<div type="button" class="button delete-item-button">Remove</div>'
+      ];
 
-      $exist = $this->validateSku($sku);
+      $exist = $this->validateSku($row['sku']);
 
       if (!$exist) {
-        $form_state->setErrorByName('sku', $this->t('SKU: @sku doesn\'t exist.', ['@sku' => $sku]));
+        $form_state->setErrorByName($value_form, $this->t('SKU: @sku doesn\'t exist.', ['@sku' => $row['sku']]));
       }
     }
   }
