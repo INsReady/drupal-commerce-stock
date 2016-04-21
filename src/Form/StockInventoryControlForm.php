@@ -139,6 +139,16 @@ class StockInventoryControlForm extends FormBase {
   /**
    * {@inheritdoc}
    */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $user_submit = &$form_state->getValue('values');
+    if (empty($user_submit)) {
+      $form_state->setErrorByName('sku', $this->t('Please at least provide one entry'));
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $op = $form_state->getValue('op');
     $des = $form_state->getValue('description');
