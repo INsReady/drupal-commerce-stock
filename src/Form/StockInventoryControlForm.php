@@ -100,41 +100,40 @@ class StockInventoryControlForm extends FormBase {
       ],
     ];
 
-
-    return $form;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-
-    foreach ($form_state->getValue('values') as $pos => $row) {
-      $value_form = &$form['values'][$pos];
-      $value_form['sku'] = [
-        '#type' => 'textfield',
-        '#default_value' => $row['sku'],
-        '#attributes' => ['readonly' => 'readonly'],
-        '#prefix' => '<div class="sku">',
-        '#suffix' => '</div>'
-      ];
-      $value_form['quantity'] = [
-        '#type' => 'number',
-        '#default_value' => $row['quantity'],
-        '#required' => TRUE,
-        '#prefix' => '<div class="quantity">',
-        '#suffix' => '</div>'
-      ];
-      $value_form['remove'] = [
-        '#markup' => '<div type="button" class="button delete-item-button">Remove</div>'
-      ];
-
-      $exist = $this->validateSku($row['sku']);
-
-      if (!$exist) {
-        $form_state->setErrorByName($value_form, $this->t('SKU: @sku doesn\'t exist.', ['@sku' => $row['sku']]));
+    // If we have user submitted values, that means this is triggered by form rebuild because of SKU not found
+    $user_submit = $form_state->getValue('values');
+    if (isset($user_submit)) {
+      $invalidSKUPos = $form_state->getStorage();
+      foreach ($user_submit as $pos => $row) {
+        $value_form = &$form['values'][$pos];
+        $value_form = [
+          '#parents' => ['values', $pos]
+        ];
+        $value_form['sku'] = [
+          '#type' => 'textfield',
+          '#default_value' => $row['sku'],
+          '#required' => TRUE,
+          '#attributes' => ['readonly' => 'readonly'],
+          '#prefix' => '<div class="sku">',
+          '#suffix' => '</div>',
+        ];
+        if (isset($invalidSKUPos[$pos]) && $invalidSKUPos[$pos]) {
+          $value_form['sku']['#attributes']['class'][] = 'error';
+        }
+        $value_form['quantity'] = [
+          '#type' => 'number',
+          '#default_value' => $row['quantity'],
+          '#required' => TRUE,
+          '#prefix' => '<div class="quantity">',
+          '#suffix' => '</div>',
+        ];
+        $value_form['remove'] = [
+          '#markup' => '<div type="button" class="button delete-item-button">Remove</div>',
+        ];
       }
     }
+
+    return $form;
   }
 
   /**
@@ -144,48 +143,66 @@ class StockInventoryControlForm extends FormBase {
     $op = $form_state->getValue('op');
     $des = $form_state->getValue('description');
     $location_id = $form_state->getValue('location');
-    $skus = $form_state->getUserInput()['sku'];
-    $quantities = $form_state->getUserInput()['qty'];
+    $_SESSION['commerce_stock_movement_form_location_id'] = $location_id;
+    $user_submit = &$form_state->getValue('values');
+    $real_submit = $form_state->getUserInput()['values'];
 
-    foreach ($skus as $pos => $sku) {
-      $stock = $this->getStock($sku, $location_id);
-
-      if ($op == 'Sell' || $op == 'Move' || $op == 'Delete') {
-        $quantity = abs($quantities[$pos]) * -1;
-      } else if ($op == 'Return' || $op == 'Fill') {
-        $quantity = abs($quantities[$pos]);
-      }
-
-      if ($des == '') {
-        $des = $op;
-      }
-
-      // If there is no stock entity set up at the specific location, creates one
-      if (!isset($stock)) {
-        $stock = Stock::create([
-          'type' => 'default',
-          'langcode' => 'en',
-          'quantity' => $quantity,
-          'stock_location' => $location_id,
-        ]);
-        $stock->setChangeReason($des);
-        $stock->save();
-
-        // Update the product variation for the entity reference
-        $query = \Drupal::entityQuery('commerce_product_variation');
-        $variationIDs = $query->condition('sku', $sku)->execute();
-        $productVariation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load(current($variationIDs));
-        $productVariation->stock->appendItem($stock);
-        $productVariation->save();
-      } else {
-        $stock->setChangeReason($des);
-        $stock->setQuantity($stock->getQuantity() + $quantity)->save();
+    // Clear outdated user submit values, these are fixed by users
+    foreach ($real_submit as $pos => $row) {
+      if (!isset($row['sku'])) {
+        unset($user_submit[$pos]);
       }
     }
 
-    $_SESSION['commerce_stock_movement_form_location_id'] = $location_id;
+    // validate SKU first
+    foreach ($user_submit as $pos => $row) {
+      if (!$this->validateSku($row['sku'])) {
+        $invalidSKUPos[$pos] = TRUE;
+        drupal_set_message($this->t('SKU: @sku doesn\'t exist.', ['@sku' => $row['sku']]), 'error');
+      }
+    }
+    if (count($invalidSKUPos) > 0) {
+      $form_state->setStorage($invalidSKUPos);
+      $form_state->setRebuild();
+    } else {
+      // When all SKUs are valid, process the submission
+      foreach ($user_submit as $pos => $row) {
+        $stock = $this->getStock($row['sku'], $location_id);
 
-    drupal_set_message($this->t('Operation: ' . $op . ' succeeded!'));
+        if ($op == 'Sell' || $op == 'Move' || $op == 'Delete') {
+          $quantity = abs($row['quantity']) * -1;
+        } else if ($op == 'Return' || $op == 'Fill') {
+          $quantity = abs($row['quantity']);
+        }
+
+        if ($des == '') {
+          $des = $op;
+        }
+
+        // If there is no stock entity set up at the specific location, creates one
+        if (!isset($stock)) {
+          $stock = Stock::create([
+            'type' => 'default',
+            'langcode' => 'en',
+            'quantity' => $quantity,
+            'stock_location' => $location_id,
+          ]);
+          $stock->setChangeReason($des);
+          $stock->save();
+
+          // Update the product variation for the entity reference
+          $query = \Drupal::entityQuery('commerce_product_variation');
+          $variationIDs = $query->condition('sku', $row['sku'])->execute();
+          $productVariation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load(current($variationIDs));
+          $productVariation->stock->appendItem($stock);
+          $productVariation->save();
+        } else {
+          $stock->setChangeReason($des);
+          $stock->setQuantity($stock->getQuantity() + $quantity)->save();
+        }
+      }
+      drupal_set_message($this->t('Operation: ' . $op . ' succeeded!'));
+    }
 
   }
 
