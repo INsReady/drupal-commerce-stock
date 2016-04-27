@@ -15,5 +15,5 @@ interface EntityStockUpdateInterface {
    * @param $des: description of the movement
    * @return mixed
    */
-  public function createTransaction($product_variation_id, $stock_id, $location_id, $qry, $uid = 0, $des = '');
+  public function createTransaction($product_variation_id, $stock_id, $location_id, $qry, $uid = 0, $des);
 }

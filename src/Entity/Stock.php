@@ -44,6 +44,8 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
 
   use EntityChangedTrait;
 
+  public $changeReason = NULL;
+
   /**
    * {@inheritdoc}
    */
@@ -146,9 +148,6 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
         if ($result) {
           $stock_location_id = $this->get('stock_location')->entity->id();
           $commerce_variation_id = reset($result);
-          if ($this->changeReason == NULL) {
-            $this->changeReason = 'Stock Updated on Product Form.';
-          }
           $this->createTransaction($commerce_variation_id, $this->id(), $stock_location_id, $this->stock_delta, 0, $this->changeReason);
         }
       }
@@ -158,7 +157,7 @@ class Stock extends ContentEntityBase implements StockInterface, EntityStockUpda
   /**
    * {@inheritdoc}
    */
-  public function createTransaction($product_variation_id, $stock_id, $location_id, $qty, $uid = 0, $des = '') {
+  public function createTransaction($product_variation_id, $stock_id, $location_id, $qty, $uid = 0, $des) {
     if (!$uid) {
       $uid = \Drupal::currentUser()->id();
     }
