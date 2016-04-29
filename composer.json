@@ -1,0 +1,10 @@
+{
+    "name": "drupal/commerce_stock",
+    "type": "drupal-module",
+    "description": "Drupal Commerce Stock.",
+    "homepage": "https://www.drupal.org/project/commerce_stock",
+    "license": "GPL-2.0+",
+    "require": {
+      "drupal/commerce": "~8.2"
+    }
+}
