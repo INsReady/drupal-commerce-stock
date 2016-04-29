@@ -39,6 +39,7 @@ function commerce_stock_entity_update(Drupal\Core\Entity\EntityInterface $entity
             'qty' => $stock->getQuantity(),
             'location_id' => $stock->getStockLocation()->id(),
             'uid' => \Drupal::currentUser()->id(),
+            'description' => $entity->stockChangeReason,
           ]);
 
         $movement->save();

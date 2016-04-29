@@ -205,6 +205,7 @@ class StockInventoryControlForm extends FormBase {
           $variationIDs = $query->condition('sku', $row['sku'])->execute();
           $productVariation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load(current($variationIDs));
           $productVariation->stock->appendItem($stock);
+          $productVariation->stockChangeReason = $des;
           $productVariation->save();
         } else {
           $stock->setChangeReason($des);
