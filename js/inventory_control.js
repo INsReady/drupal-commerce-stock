@@ -51,7 +51,12 @@ $(function(){
       $(".quantity input.form-number").eq(p).val(q+1);
     }
     else {
-      var rowCount = $( "#edit-values .sku input").length;
+      // Check if a row number exists, if not, use it
+      var rowNum = -1; // if there is now row, then below condition check is skipped
+      $("#edit-values .sku input").each(function(i) {
+        rowNum = Math.max($(this).attr('name').split(/[[\]]{1,2}/)[1], i);
+      });
+      var rowCount = rowNum + 1;
       var preHTML = '<tr>';
       var postHTML = '<td><button class="button btn-danger delete-item-button" type="button">Remove</button></td>';
       $("#edit-values").append(
