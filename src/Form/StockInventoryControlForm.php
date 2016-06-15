@@ -187,6 +187,8 @@ class StockInventoryControlForm extends FormBase {
 
         if ($des == '') {
           $des = $op;
+        } else {
+          $des = $op . ': ' .$des;
         }
 
         // If there is no stock entity set up at the specific location, creates one
