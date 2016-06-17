@@ -157,6 +157,12 @@ class StockInventoryControlForm extends FormBase {
     $user_submit = &$form_state->getValue('values');
     $real_submit = $form_state->getUserInput()['values'];
 
+    if ($des == '') {
+      $des = $op;
+    } else {
+      $des = $op . ': ' .$des;
+    }
+
     // Clear outdated user submit values, these are fixed by users
     foreach ($real_submit as $pos => $row) {
       if (!isset($row['sku'])) {
@@ -183,12 +189,6 @@ class StockInventoryControlForm extends FormBase {
           $quantity = abs($row['quantity']) * -1;
         } else if ($op == 'Return' || $op == 'Fill') {
           $quantity = abs($row['quantity']);
-        }
-
-        if ($des == '') {
-          $des = $op;
-        } else {
-          $des = $op . ': ' .$des;
         }
 
         // If there is no stock entity set up at the specific location, creates one
