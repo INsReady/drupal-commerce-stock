@@ -172,6 +172,8 @@ class StockInventoryControlForm extends FormBase {
 
     // validate SKU first
     foreach ($user_submit as $pos => $row) {
+      $invalidSKUPos = [];
+
       if (!$this->validateSku($row['sku'])) {
         $invalidSKUPos[$pos] = TRUE;
         drupal_set_message($this->t('SKU: @sku doesn\'t exist.', ['@sku' => $row['sku']]), 'error');
