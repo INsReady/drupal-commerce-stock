@@ -250,7 +250,9 @@ class StockInventoryControlForm extends FormBase {
 
     $stock_id = $query->execute()->fetchField();
 
-    return \Drupal::entityTypeManager()->getStorage('commerce_stock')->load($stock_id);
+    if ($stock_id) {
+      return \Drupal::entityTypeManager()->getStorage('commerce_stock')->load($stock_id);
+    } else return NULL;
   }
 
 }
