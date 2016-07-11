@@ -171,8 +171,8 @@ class StockInventoryControlForm extends FormBase {
     }
 
     // validate SKU first
+    $invalidSKUPos = [];
     foreach ($user_submit as $pos => $row) {
-      $invalidSKUPos = [];
 
       if (!$this->validateSku($row['sku'])) {
         $invalidSKUPos[$pos] = TRUE;
