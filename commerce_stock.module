@@ -4,6 +4,10 @@ use Drupal\commerce_stock\Entity\Stock;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\Views;
+use Drupal\commerce_stock\Entity;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
 
 /**
  * @file
@@ -77,4 +81,47 @@ function commerce_stock_views_query_alter(ViewExecutable $view, QueryPluginBase 
       $query->addWhere(0, 'uid_target_id', $user->id(), '=');
     }
   }
+}
+
+/**
+ * Hide Add to cart button when stock is under or equal to zero
+ *
+ * Implements hook_form_commerce_order_item_add_to_cart_form_alter().
+ */
+function commerce_stock_form_commerce_order_item_add_to_cart_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form_data = $form_state->getStorage();
+  if (empty($form_data['product'])) {
+    return;
+  }
+	$product = $form_data['product'];
+  
+	$location_id = 1; //@ToDo get overall stock from all Stock locations
+	$variation_id = $product->getVariationIds()[0];
+	
+  $connection = Database::getConnection('default', NULL);
+  $query = $connection->select('commerce_product_variation__stock', 'cs');
+  $query->join('commerce_stock_field_data', 'csf', 'csf.stock_id=cs.stock_target_id');
+  $query->fields('cs', ['stock_target_id']);
+	$query->condition('cs.entity_id', $variation_id);
+  $query->condition('csf.stock_location', $location_id);
+	
+  $stock_id = $query->execute()->fetchField();
+	
+  if ($stock_id) {
+    $stock = \Drupal::entityTypeManager()->getStorage('commerce_stock')->load($stock_id);
+  }
+	
+	$quantity = $stock->getQuantity();
+	
+	if ($quantity <= 0) {
+		$form['quantity'] = null;
+		$form['actions'] = null;
+		$form['outofstock'] = [
+		  '#type' => 'textfield',
+		  '#value' => t('Out of stock'),
+		  '#weight' => 0,
+		  '#disabled' => true,
+		];
+	}
+	
 }
